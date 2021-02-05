@@ -255,7 +255,7 @@ if __name__ == "__main__":
                         default='DBpedia',
                         type=str,
                         help='output path ', 
-                        )
+                        ) 
     parser.add_argument('-o', '--output_path',
                         default='result_pale',
                         type=str,
@@ -272,8 +272,10 @@ if __name__ == "__main__":
 
     # outputs:
     output_data = args.output_data
-    if not os.path.exists(output_data):
+    if not os.path.exists(output_data): # create the path only if it is not already there.
         os.makedirs(output_data)
+    
+        
     with open(output_data+"/company_id_list.json", 'w', encoding='utf8') as outfile:
         json.dump(company_id_list, outfile, ensure_ascii=False)
     with open(output_data+"/wiki_terms.json", 'w', encoding='utf8') as outfile:
