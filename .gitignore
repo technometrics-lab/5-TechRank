@@ -193,5 +193,6 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/vscode,python,macos,jupyternotebooks
 
 DBpedia/
-DBpedia_com_tech-G.json
 graph/
+data/
+company.json/
