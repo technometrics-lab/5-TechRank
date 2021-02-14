@@ -1,7 +1,7 @@
 import json
 import os
 import argparse
-from tqdm.notebook  import tqdm
+from tqdm.notebook import tqdm
 import glob
 import networkx as nx
 from networkx.readwrite import json_graph
@@ -236,19 +236,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-c', '--company',
-                        default="/hdd/tam/entity-fishing-custom/data_crawl/data_swiss/tmm_data/mnt/tmm_share/data/20200401T000000/company.json/",
+                        default="/mnt/tmm_share/data/20200401T000000/company.json/",
                         type=str,
                         help='path to folder of spacy-indeed result')
     parser.add_argument('-i', '--indeed',
-                        default="/hdd/tam/entity-fishing-custom/data_crawl/data_swiss/tmm_data/mnt/tmm_share/data/20200401T000000/indeed/",
+                        default="/mnt/tmm_share/data/20200401T000000/indeed/",
                         type=str,
                         help='path to folder of spacy-patent result')
     parser.add_argument('-m', '--mag',
-                        default="/hdd/tam/entity-fishing-custom/data_crawl/data_swiss/tmm_data/mnt/tmm_share/data/20200401T000000/mag/",
+                        default="/mnt/tmm_share/data/20200401T000000/mag/",
                         type=str,
                         help='path to folder of spacy-register result')
     parser.add_argument('-pv', '--patentsview',
-                        default="/hdd/tam/entity-fishing-custom/data_crawl/data_swiss/tmm_data/mnt/tmm_share/data/20200401T000000/patentsview/",
+                        default="/mnt/tmm_share/data/20200401T000000/patentsview/",
                         type=str,
                         help='path to folder of indeed result')
     parser.add_argument('-od', '--output_data',
