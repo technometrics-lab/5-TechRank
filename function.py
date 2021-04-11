@@ -7,7 +7,8 @@ import json
 import matplotlib.pyplot as plt
 import math
 
-from typing import List, Dict 
+from typing import List, Dict
+from classes import Company, Investor, Technology
 
 # import os.path
 
@@ -74,23 +75,99 @@ def CB_data_cleaning (
     if len(sort_by)>0:
         df = df.sort_values(sort_by)
 
+    sort_by
+
     return df
 
 
-def extract_nodes(G, bipartite_set):
-    """Extract nodes from the nodes of one of the bipartite sets
+def extract_data_from_column(column, get_what:str):
+    """Extracts data from complex columns
 
     Args:
-        - df: Datafame
-        - bipartite_set: select one of the two sets (0 or 1)
+        - column: data to be changed
+        - get_what: value or values we are interested in
 
     Return:
-        - B: bipartite graph 
+        - column: cleaned data
     """
 
-    nodes = {n for n, d in G.nodes(data=True) if d["bipartite"] == bipartite_set}
+    if isinstance(column, pd.core.series.Series):
+        column = column.values
 
-    return nodes
+    i = 0
+    for line in column:
+        
+        if issubclass(type(line), float) == False:
+            column[i] = [ x.get(get_what) for x in line]
+        
+        i = i+1
+
+    return column
+
+
+def extract_classes_company_tech(df):
+    """Extracts the dictionaries of Companies and Technologies 
+    from the dataset 
+    
+    Args:
+        - df: dataset
+
+    Return:
+        - dict_companies: dictionary of companies
+        - dict_tech: dictionary of technologies
+    """
+
+    df = df.dropna(subset=['location_comp'])
+    
+    # dictionary of companies: name company: class Company
+    dict_companies = {}
+    # dictionary of technologies: name technology: class Technology
+    dict_tech = {}
+    # initialization bipartite graph:
+    B = nx.Graph()
+    
+    for index, row in df.iterrows():   
+        
+        location_df = row['location_comp']
+        #location_company = {x.get('location_type'):x.get('value') for x in location_df}
+
+        location_company = {}
+
+        for x in location_df:
+            print(x)
+            loc_type = x['location_type']
+            value = x['value']
+            location_company[loc_type] = value
+    
+        # Companies:
+        comp_name = row['name']
+
+        c = Company(
+            id=row['uuid'],
+            name=comp_name,
+            location = location_company
+                   )
+        
+        dict_companies[comp_name] = c
+
+        B.add_node(comp_name, bipartite=0)
+        
+        # Technologies:
+        if issubclass(type(row['category_groups']), List):
+            for tech in row['category_groups']:
+                t = Technology(name=tech)
+                dict_tech[tech] = t
+
+                B.add_node(tech, bipartite=1)
+                B.add_edge(comp_name, tech)
+        else:
+            t = Technology(name=tech)
+            dict_tech[tech] = t   
+
+            B.add_node(tech, bipartite=1)
+            B.add_edge(comp_name, tech)
+
+    return dict_companies, dict_tech, B
 
 
 def nx_dip_graph_from_pandas(df):
@@ -131,6 +208,22 @@ def nx_dip_graph_from_pandas(df):
     return B
 
 
+def extract_nodes(G, bipartite_set):
+    """Extract nodes from the nodes of one of the bipartite sets
+
+    Args:
+        - df: Datafame
+        - bipartite_set: select one of the two sets (0 or 1)
+
+    Return:
+        - B: bipartite graph 
+    """
+
+    nodes = {n for n, d in G.nodes(data=True) if d["bipartite"] == bipartite_set}
+
+    return nodes
+
+
 def filter_dict(G, percentage, set1, set2):
     """Selects values to delete from the graph G according to ...
 
@@ -157,28 +250,33 @@ def filter_dict(G, percentage, set1, set2):
     
     return to_delete
 
-def plot_bipartite_graph(G, small_degree=True, percentage=10):
+
+def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     """Plots the bipartite network ...
 
     Args:
         - G: graph 
         - small_degree
         - percentage
+        - circular
     """
 
     set1 = [node for node in G.nodes() if G.nodes[node]['bipartite']==0]
     set2 = [node for node in G.nodes() if G.nodes[node]['bipartite']==1]
 
-    pos=nx.spring_layout(G) # positions for all nodes
-    #pos=nx.circular_layout(G)
-
+    if circular==False:
+        pos=nx.spring_layout(G) # positions for all nodes
+    else:
+        pos=nx.circular_layout(G)
 
     if small_degree == False: # don't plot nodes with low number of edges
         to_delete = filter_dict(G, percentage, set1, set2)
-        G.remove_nodes_from(to_delete)
-        G.remove_nodes_from(list(nx.isolates(G)))
 
-        plot_bipartite_graph(G, small_degree=True)
+        G_filtered = G.copy()
+        G_filtered.remove_nodes_from(to_delete)
+        G_filtered.remove_nodes_from(list(nx.isolates(G_filtered)))
+
+        plot_bipartite_graph(G_filtered, small_degree=True, percentage=percentage, circular=circular)
         
         return 
 
@@ -199,19 +297,21 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10):
     plt.axis('off')
 
     # nodes
-    nx.draw_networkx_nodes(G,pos,
-                        nodelist=company,
-                        node_color='r',
-                        node_size=[v * 100 for v in dict(companyDegree).values()],
-                        alpha=0.3,
-                        label=company)
+    nx.draw_networkx_nodes(G,
+                           pos,
+                           nodelist=company,
+                           node_color='r',
+                           node_size=[v * 100 for v in dict(companyDegree).values()],
+                           alpha=0.3,
+                           label=company)
 
-    nx.draw_networkx_nodes(G,pos,
-                        nodelist=value,
-                        node_color='b',
-                        node_size=[v * 200 for v in dict(valueDegree).values()],
-                        alpha=0.3,
-                        label=value)
+    nx.draw_networkx_nodes(G,
+                           pos,
+                           nodelist=value,
+                           node_color='b',
+                           node_size=[v * 200 for v in dict(valueDegree).values()],
+                           alpha=0.3,
+                           label=value)
 
     nx.draw_networkx_labels(G, pos, {n: n for n in company}, font_size=10)
     nx.draw_networkx_labels(G, pos, {n: n for n in value}, font_size=10)
@@ -220,3 +320,53 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10):
     nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.5)
 
     return 
+
+
+def degree_bip(G):
+    """Gives the degree of each node of the two bipartite graphs.
+
+    degree: number of links
+
+    Args:
+        - G: graph
+
+    Return:
+        - degree_set0(1): degree of the bipartite set 0(1)
+    """
+
+    set0 = extract_nodes(G, 0)
+    set1 = extract_nodes(G, 1)
+
+    # calculate degree centrality
+    degree_set0 = nx.degree(G, set0) 
+    degree_set1 = nx.degree(G, set1)
+
+    return dict(degree_set0), dict(degree_set1)
+
+
+def insert_data_classes(dict_class: Dict, new_data: Dict, feature: str):
+
+    """
+
+    Arg:
+        - dict_class: (name, class)
+        - new_data: dict or DegreeView with the name and the value of the feature
+        - feature: name of the feature in class to update 
+
+    Return:
+        - dict_class: (name, class) with updated class
+    """
+    
+    for name, value in new_data.items():
+        
+        if name not in dict_class.keys():
+            print(f"Error: try to add a feature for {name}, which is not in class")
+            return
+        
+        c = dict_class[name]
+        
+        setattr(c, feature, value)
+    
+    return dict_class
+
+
