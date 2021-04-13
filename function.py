@@ -129,15 +129,15 @@ def extract_classes_company_tech(df):
     for index, row in df.iterrows():   
         
         location_df = row['location_comp']
-        #location_company = {x.get('location_type'):x.get('value') for x in location_df}
+        location_company = {x.get('location_type'):x.get('value') for x in location_df}
 
-        location_company = {}
+        """location_company = {}
 
         for x in location_df:
-            print(x)
+            #print(x)
             loc_type = x['location_type']
             value = x['value']
-            location_company[loc_type] = value
+            location_company[loc_type] = value"""
     
         # Companies:
         comp_name = row['name']
@@ -208,18 +208,18 @@ def nx_dip_graph_from_pandas(df):
     return B
 
 
-def extract_nodes(G, bipartite_set):
+def extract_nodes(G, bipartite_set) -> List:
     """Extract nodes from the nodes of one of the bipartite sets
 
     Args:
-        - df: Datafame
+        - G: graph
         - bipartite_set: select one of the two sets (0 or 1)
 
     Return:
-        - B: bipartite graph 
+        - nodes: list of nodes of that set
     """
 
-    nodes = {n for n, d in G.nodes(data=True) if d["bipartite"] == bipartite_set}
+    nodes = [n for n, d in G.nodes(data=True) if d["bipartite"] == bipartite_set]
 
     return nodes
 
