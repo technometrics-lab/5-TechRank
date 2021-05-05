@@ -1,0 +1,19 @@
+initial_position,final_configuration,degree,final_rank
+0,Transportation,1,1.0
+1,Food and Beverage,1,1.0
+2,Administrative Services,1,1.0
+5,Mobile,1,1.159
+6,Messaging and Telecommunications,1,1.159
+7,Apps,1,1.159
+8,Music and Audio,1,1.221
+3,Other,1,1.291
+4,Commerce and Shopping,1,1.291
+9,Information Technology,2,1.732
+10,Video,2,2.035
+11,Media and Entertainment,2,2.035
+12,Content and Publishing,2,2.035
+13,Internet Services,3,2.119
+14,Payments,2,2.377
+15,Software,3,2.766
+16,Lending and Investments,4,3.982
+17,Financial Services,5,4.641

@@ -1,0 +1,80 @@
+initial_position,final_configuration,degree,final_rank
+22,Virtualization,1,2.158
+21,File Sharing,1,2.158
+25,Email,1,2.285
+24,PaaS,1,2.285
+19,Management Consulting,1,2.286
+17,Software Engineering,1,2.286
+18,Professional Services,1,2.286
+15,Mobile Payments,1,2.288
+11,EdTech,1,2.386
+12,Education,1,2.386
+13,Recruiting,1,2.386
+32,Employee Benefits,1,2.593
+33,Small and Medium Businesses,1,2.593
+5,Renewable Energy,1,2.629
+6,Data Center,1,2.629
+7,Aerospace,1,2.629
+4,Telecommunications,1,2.629
+38,Medical Device,1,2.795
+1,Marketing Automation,1,2.995
+3,App Marketing,1,2.995
+2,Apps,1,2.995
+23,Developer APIs,1,3.064
+29,Banking,1,3.064
+30,Payments,1,3.066
+26,Data Visualization,1,3.07
+9,Intelligent Systems,1,3.32
+8,Information Services,1,3.32
+10,Database,1,3.408
+42,Developer Tools,1,3.417
+37,Crowdsourcing,1,3.425
+27,Robotics,1,3.426
+20,Medical,1,3.432
+41,Mobile Devices,2,3.451
+14,Angel Investment,1,3.696
+0,Finance,1,3.713
+39,Biometrics,2,3.784
+40,Consulting,2,3.784
+43,Big Data,2,3.786
+56,Enterprise Resource Planning (ERP),2,3.875
+35,Cloud Infrastructure,2,3.936
+34,Automotive,1,3.942
+31,E-Learning,2,4.034
+48,Fraud Detection,2,4.041
+45,Mobile,2,4.041
+55,Intrusion Detection,2,4.129
+54,Supply Chain Management,2,4.137
+51,Predictive Analytics,2,4.14
+52,Asset Management,2,4.255
+46,Cloud Data Services,2,4.333
+16,Hardware,1,4.728
+36,Financial Services,2,4.737
+44,Cloud Computing,2,4.942
+57,Training,3,4.952
+50,Health Care,3,5.208
+47,Industrial Automation,2,5.215
+28,Venture Capital,2,5.238
+49,Open Source,3,5.31
+64,Industrial,3,5.349
+58,Penetration Testing,4,5.587
+53,Internet of Things,4,5.603
+59,Privacy,4,5.877
+60,Analytics,4,5.913
+62,Business Intelligence,4,6.034
+61,Identity Management,5,6.373
+63,Blockchain,5,6.66
+65,Compliance,6,7.535
+67,Machine Learning,7,7.558
+66,Internet,5,8.347
+68,Risk Management,7,8.403
+69,Artificial Intelligence,9,8.788
+70,Enterprise Software,11,9.94
+71,SaaS,12,10.762
+73,Cloud Security,14,11.926
+72,Computer,10,11.974
+74,Information Technology,30,18.163
+75,Software,39,19.632
+76,Network Security,43,21.517
+77,Security,44,21.737
+78,Cyber Security,91,32.232

@@ -1,19 +1,9 @@
-#import math
 import pandas as pd
 
-#import arrow
-
-#import ipynb 
-#import os.path
-#import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-
-#from dotenv import load_dotenv
-#from networkx.algorithms import bipartite
-#from importlib import reload
 
 
 def M_test_triangular(M):
@@ -43,6 +33,8 @@ def M_test_triangular(M):
     plt.imshow(M_sorted_sorted, cmap=plt.cm.bone, interpolation='nearest')
     plt.xlabel("Technologies")
     plt.ylabel("Companies")
+    plt.savefig(f'plots/matrix_{str(M_sorted.shape)}.pdf')
+    plt.savefig(f'plots/matrix_{str(M_sorted.shape)}.png')
     plt.show()
 
     return
@@ -166,7 +158,7 @@ def w_stream(M, i, alpha, beta):
             break
 
 
-def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False,):
+def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
     '''finds the convergence point (or gives up after 1000 iterations)'''
     
     # technologies or company
@@ -185,6 +177,10 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False,):
     
     weights = generator_order_w(M, alpha, beta)
 
+    # open file
+    f = open(f"text/iteration_tracker_{Mshape}.txt", "w")
+    f.close()
+
     for stream_data in weights:
         
         iteration = stream_data['iteration']
@@ -192,13 +188,30 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False,):
         data = stream_data[fit_or_ubiq] # weights
         
         rankdata = data.argsort().argsort()
+
+        # print(f"iteration : {iteration}")
         
         if iteration==1:
             # print(iteration, rankdata)
             initial_conf = rankdata
-        
+
+        # save on text
+        str1 = "Iteration number " + str(iteration) 
+        f = open(f"text/iteration_tracker_{Mshape}.txt", "a")
+        print(str1, file=f)
+        f.close()
+
         # test for convergence
         if np.equal(rankdata,prev_rankdata).all(): # no changes
+
+            # reappend two times to make plot flat
+            rankings.append(rankdata)
+            rankings.append(rankdata)
+            rankings.append(rankdata)
+            scores.append(data)
+            scores.append(data)
+            scores.append(data)
+
             break
         if iteration == 1000: # max limit
             break
@@ -206,17 +219,21 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False,):
             rankings.append(rankdata)
             scores.append(data)
             prev_rankdata = rankdata
+
             
     # print(iteration, rankdata)
     final_conf = rankdata
+
     
     # plot:
     if do_plot and iteration>2:
         plt.figure(figsize=(10, 10))
-        plt.xlabel('Iteration')
-        plt.ylabel('Rank, higher is better')
-        plt.title(f'{name} rank evolution')
-        p = plt.semilogx(range(1,iteration), rankings, '-,', alpha=0.5)
+        plt.xlabel('Iteration', fontsize=14)
+        plt.ylabel('Rank, higher is better', fontsize=14)
+        plt.title(f'{name} rank evolution', fontsize=16)
+        p = plt.semilogx(range(1,iteration+3), rankings, '-,', alpha=0.5)
+
+       
         
     return {fit_or_ubiq:scores[-1], 
             'iteration':iteration, 
@@ -237,8 +254,11 @@ def rank_df_class(convergence, dict_class):
     list_names = [*dict_class]
     
     n = len(list_names)
-    
-    columns_final = ['initial_position', 'final_configuration', 'degree', 'final_rank']
+
+    if hasattr(list_names[0], 'rank_CB'):
+        columns_final = ['initial_position', 'final_configuration', 'degree', 'final_rank', 'rank_CB']
+    else:
+        columns_final = ['initial_position', 'final_configuration', 'degree', 'final_rank']
 
     df_final = pd.DataFrame(columns=columns_final, index=range(n))
     
@@ -255,6 +275,12 @@ def rank_df_class(convergence, dict_class):
         df_final.loc[final_pos, 'degree'] = degree
         df_final.loc[final_pos, 'initial_position'] = ini_pos
         df_final.loc[final_pos, 'final_rank'] = rank
+
+
+        if hasattr(dict_class[name], 'rank_CB'):
+            rank_CB = dict_class[name].rank_CB
+            df_final.loc[final_pos, 'rank_CB'] = rank_CB
+        
         
         # update class's instances with rank
         dict_class[name].rank_algo = rank

@@ -6,6 +6,7 @@ import arrow
 import json
 import matplotlib.pyplot as plt
 import math
+import numpy as np
 
 from typing import List, Dict
 from classes import Company, Investor, Technology
@@ -39,6 +40,10 @@ def df_from_api_CB (query, cb_table):
 
     json_data = json.loads(r.text)
 
+    if 'entities' not in json_data:
+        print(json_data)
+        return
+
     df = pd.json_normalize(json_data['entities'])
 
     return df
@@ -49,6 +54,7 @@ def CB_data_cleaning (
     to_drop: List[str], 
     to_rename: Dict[str, str], 
     to_check_double: Dict[str, str],
+    drop_if_nan: List[str], 
     sort_by: str = ""):
     """Performs the Data Cleaning part of the CB dataset
 
@@ -64,13 +70,18 @@ def CB_data_cleaning (
         - df: cleaned dataset
     """
 
-    df = df.drop(to_drop, axis=1)
+    df = df.drop(to_drop, axis=1, errors='ignore')
     df = df.rename(columns = to_rename)
 
     for key, item in to_check_double.items():
         # item does not bring new info:
         if (df[key] == df[item]).all() == True: 
             df = df.drop([item], axis=1)
+
+    # drop if nan
+    if len(drop_if_nan)>0:
+        for to_drop in drop_if_nan:
+            df = df.dropna(subset=[to_drop])
 
     if len(sort_by)>0:
         df = df.sort_values(sort_by)
@@ -116,8 +127,6 @@ def extract_classes_company_tech(df):
         - dict_companies: dictionary of companies
         - dict_tech: dictionary of technologies
     """
-
-    df = df.dropna(subset=['location_comp'])
     
     # dictionary of companies: name company: class Company
     dict_companies = {}
@@ -128,25 +137,40 @@ def extract_classes_company_tech(df):
     
     for index, row in df.iterrows():   
         
-        location_df = row['location_comp']
-        location_company = {x.get('location_type'):x.get('value') for x in location_df}
+        if 'location_comp' in row:
+            location_df = row['location_comp']
+            location_company = {x.get('location_type'):x.get('value') for x in location_df}
+        else:
+            location_company = {
+                'country_code': row['country_code'], 
+                'region': row['region'], 
+                'city': row['city']
+                }
 
-        """location_company = {}
+        """
+        location_company = {}
 
         for x in location_df:
             #print(x)
             loc_type = x['location_type']
             value = x['value']
-            location_company[loc_type] = value"""
+            location_company[loc_type] = value
+        """
     
         # Companies:
         comp_name = row['name']
 
         c = Company(
-            id=row['uuid'],
-            name=comp_name,
+            id = row['uuid'],
+            name = comp_name,
             location = location_company
                    )
+
+        # if CB rank
+        if 'rank_company' in df.columns:
+            c.rank_CB = row['rank_company']
+        elif 'rank' in df.columns:
+            c.rank_CB = row['rank']
         
         dict_companies[comp_name] = c
 
@@ -161,7 +185,7 @@ def extract_classes_company_tech(df):
                 B.add_node(tech, bipartite=1)
                 B.add_edge(comp_name, tech)
         else:
-            t = Technology(name=tech)
+            t = Technology(name=row['category_groups'])
             dict_tech[tech] = t   
 
             B.add_node(tech, bipartite=1)
@@ -229,14 +253,21 @@ def filter_dict(G, percentage, set1, set2):
 
     Args:
         - G: graph 
-        - 
-        -
+        - percentage: percentage of entities to keep
+        - set1: first group of nodes
+        - set2: second group of nodes
 
     Return:
         - to_delete: list of values to delete
     """
+
+    degree_set2 = list(dict(nx.degree(G, set2)).values())
     
     threshold_companies = math.ceil( len(set2)/percentage )
+    
+    
+    if threshold_companies > np.max(degree_set2): # not okay because we would not plot anything
+        threshold_companies=np.mean(degree_set2)
     
     dict_nodes = nx.degree(G, set1) 
     
@@ -256,7 +287,9 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
 
     Args:
         - G: graph 
-        - small_degree
+        - small_degree: if plot the nodes with small degree
+            if True: plot all
+            if False: delete nodes with low degree
         - percentage
         - circular
     """
@@ -264,10 +297,10 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     set1 = [node for node in G.nodes() if G.nodes[node]['bipartite']==0]
     set2 = [node for node in G.nodes() if G.nodes[node]['bipartite']==1]
 
-    if circular==False:
-        pos=nx.spring_layout(G) # positions for all nodes
+    if circular == False:
+        pos = nx.spring_layout(G) # positions for all nodes
     else:
-        pos=nx.circular_layout(G)
+        pos = nx.circular_layout(G)
 
     if small_degree == False: # don't plot nodes with low number of edges
         to_delete = filter_dict(G, percentage, set1, set2)
@@ -289,7 +322,7 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     companyDegree = nx.degree(G, company) 
     valueDegree = nx.degree(G, value)
 
-    if len(set1)>30:
+    if len(set1)>=20:
         plt.figure(1,figsize=(25,15))
     else: 
         plt.figure(1,figsize=(15,10)) 
