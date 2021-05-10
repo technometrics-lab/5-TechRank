@@ -1,80 +1,127 @@
 initial_position,final_configuration,degree,final_rank
-22,Virtualization,1,2.158
-21,File Sharing,1,2.158
-25,Email,1,2.285
-24,PaaS,1,2.285
-19,Management Consulting,1,2.286
-17,Software Engineering,1,2.286
-18,Professional Services,1,2.286
-15,Mobile Payments,1,2.288
-11,EdTech,1,2.386
-12,Education,1,2.386
-13,Recruiting,1,2.386
-32,Employee Benefits,1,2.593
-33,Small and Medium Businesses,1,2.593
-5,Renewable Energy,1,2.629
-6,Data Center,1,2.629
-7,Aerospace,1,2.629
-4,Telecommunications,1,2.629
-38,Medical Device,1,2.795
-1,Marketing Automation,1,2.995
-3,App Marketing,1,2.995
-2,Apps,1,2.995
-23,Developer APIs,1,3.064
-29,Banking,1,3.064
-30,Payments,1,3.066
-26,Data Visualization,1,3.07
-9,Intelligent Systems,1,3.32
-8,Information Services,1,3.32
-10,Database,1,3.408
-42,Developer Tools,1,3.417
-37,Crowdsourcing,1,3.425
-27,Robotics,1,3.426
-20,Medical,1,3.432
-41,Mobile Devices,2,3.451
-14,Angel Investment,1,3.696
-0,Finance,1,3.713
-39,Biometrics,2,3.784
-40,Consulting,2,3.784
-43,Big Data,2,3.786
-56,Enterprise Resource Planning (ERP),2,3.875
-35,Cloud Infrastructure,2,3.936
-34,Automotive,1,3.942
-31,E-Learning,2,4.034
-48,Fraud Detection,2,4.041
-45,Mobile,2,4.041
-55,Intrusion Detection,2,4.129
-54,Supply Chain Management,2,4.137
-51,Predictive Analytics,2,4.14
-52,Asset Management,2,4.255
-46,Cloud Data Services,2,4.333
-16,Hardware,1,4.728
-36,Financial Services,2,4.737
-44,Cloud Computing,2,4.942
-57,Training,3,4.952
-50,Health Care,3,5.208
-47,Industrial Automation,2,5.215
-28,Venture Capital,2,5.238
-49,Open Source,3,5.31
-64,Industrial,3,5.349
-58,Penetration Testing,4,5.587
-53,Internet of Things,4,5.603
-59,Privacy,4,5.877
-60,Analytics,4,5.913
-62,Business Intelligence,4,6.034
-61,Identity Management,5,6.373
-63,Blockchain,5,6.66
-65,Compliance,6,7.535
-67,Machine Learning,7,7.558
-66,Internet,5,8.347
-68,Risk Management,7,8.403
-69,Artificial Intelligence,9,8.788
-70,Enterprise Software,11,9.94
-71,SaaS,12,10.762
-73,Cloud Security,14,11.926
-72,Computer,10,11.974
-74,Information Technology,30,18.163
-75,Software,39,19.632
-76,Network Security,43,21.517
-77,Security,44,21.737
-78,Cyber Security,91,32.232
+53,Enterprise,1,1.565
+54,Smart Building,1,1.565
+63,Web Development,1,1.565
+64,Mobile Devices,1,1.565
+24,Simulation,1,1.87
+23,Drones,1,1.87
+52,Search Engine,1,1.87
+46,Infrastructure,1,1.87
+45,Productivity Tools,1,1.87
+11,Communications Infrastructure,1,1.87
+10,Telecommunications,1,1.87
+12,Wireless,1,1.87
+13,Electronics,1,1.87
+42,Mobile Payments,1,1.87
+35,Social Media,1,2.02
+27,Lending,1,2.02
+4,Travel,1,2.213
+3,Tourism,1,2.213
+5,Hospitality,1,2.213
+40,Automotive,1,2.213
+36,Predictive Analytics,1,2.213
+37,Hardware,1,2.213
+48,Email,1,2.213
+47,Facial Recognition,1,2.213
+78,Cloud Management,1,2.213
+79,Data Center,1,2.213
+56,Legal,1,2.213
+60,Enterprise Resource Planning (ERP),1,2.213
+29,Sales Automation,1,2.213
+65,Content Delivery Network,1,2.213
+31,Advertising,1,2.213
+32,Web Browsers,1,2.213
+20,Cannabis,1,2.213
+8,Wearables,1,2.474
+9,Industrial Automation,1,2.474
+30,Intrusion Detection,1,2.474
+69,Crowdsourcing,1,2.474
+38,Business Intelligence,1,2.474
+39,Document Management,1,2.474
+62,Event Management,1,2.474
+74,Developer APIs,1,2.474
+51,IT Management,1,2.474
+17,Consumer Electronics,1,2.474
+18,Sensor,1,2.474
+41,App Marketing,1,2.474
+33,Training,1,2.474
+34,Penetration Testing,1,2.474
+25,Collaborative Consumption,1,2.474
+26,News,1,2.474
+21,Management Information Systems,1,2.474
+22,CRM,1,2.474
+28,Property Management,1,2.474
+7,Biotechnology,1,2.474
+6,Genetics,1,2.474
+0,Therapeutics,1,2.474
+2,Consulting,1,2.474
+1,mHealth,1,2.474
+99,Virtualization,2,2.671
+77,Physical Security,2,2.855
+94,Internet of Things,2,2.855
+14,Air Transportation,1,2.856
+19,Electric Vehicle,1,2.856
+44,Biometrics,1,2.856
+16,Life Science,1,2.856
+15,Software Engineering,1,2.856
+67,Computer Vision,2,2.887
+93,Industrial,2,2.887
+91,Real Time,2,2.887
+73,Private Cloud,2,2.887
+84,Payments,2,2.887
+61,E-Commerce,2,2.887
+72,Messaging,2,2.993
+71,Mobile Apps,2,2.993
+49,Public Safety,2,3.071
+59,Professional Services,2,3.129
+70,Consumer Lending,2,3.177
+85,Data Integration,2,3.314
+87,Web Hosting,2,3.314
+66,Marketing Automation,2,3.314
+75,Cloud Data Services,2,3.314
+80,Virtual Currency,2,3.314
+83,Smart Home,2,3.498
+86,Information Services,2,3.498
+57,Medical,2,3.498
+58,Autonomous Vehicles,2,3.584
+92,Asset Management,2,3.584
+50,Consumer,2,3.584
+96,File Sharing,3,3.609
+88,Mobile,3,3.674
+43,Aerospace,2,3.769
+81,Insurance,2,3.769
+55,Real Estate,2,3.769
+100,Open Source,3,3.785
+76,Marketplace,3,3.872
+90,Collaboration,3,3.983
+68,Transportation,3,4.204
+104,Developer Tools,3,4.285
+102,Cryptocurrency,4,4.384
+95,Finance,3,4.464
+103,FinTech,5,4.555
+98,Bitcoin,4,4.686
+82,Health Care,4,4.817
+112,Privacy,6,4.918
+108,Computer,5,5.026
+110,Compliance,5,5.181
+89,Robotics,5,5.199
+106,Identity Management,5,5.296
+107,Internet,5,5.352
+97,Cloud Infrastructure,4,5.428
+105,Financial Services,6,5.431
+115,Big Data,6,5.475
+111,Risk Management,5,5.586
+109,Blockchain,7,5.677
+101,Apps,6,5.767
+116,Cloud Computing,8,5.811
+113,Machine Learning,8,6.776
+117,Analytics,9,6.83
+114,Artificial Intelligence,9,7.126
+118,SaaS,15,8.534
+121,Cloud Security,16,8.966
+119,Information Technology,19,9.798
+120,Enterprise Software,22,10.605
+123,Network Security,24,11.501
+122,Security,29,12.553
+124,Software,37,13.637
+125,Cyber Security,42,14.757

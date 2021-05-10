@@ -309,9 +309,39 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
         G_filtered.remove_nodes_from(to_delete)
         G_filtered.remove_nodes_from(list(nx.isolates(G_filtered)))
 
-        plot_bipartite_graph(G_filtered, small_degree=True, percentage=percentage, circular=circular)
+        pos = plot_bipartite_graph(G_filtered, small_degree=True, percentage=percentage, circular=circular)
         
-        return 
+        return pos
+
+    if len(set1)>=20:
+        plt.figure(1,figsize=(25,15))
+    else: 
+        plt.figure(1,figsize=(19,13)) 
+    
+    plt.axis('off')
+
+
+
+    if "Social Recruiting" in G.nodes():
+        G.remove_node("Social Recruiting")
+    if "Mobile" in G.nodes():
+        G.remove_node("Mobile")
+    if "Sales" in G.nodes():
+        G.remove_node("Sales")
+    if "Analytics" in G.nodes():
+        G.remove_node("Analytics")
+    if "Government" in G.nodes():
+        G.remove_node("Government")
+    if "Education" in G.nodes():
+        G.remove_node("Education")
+    if "Personalization" in G.nodes():
+        G.remove_node("Personalization")
+    if "Military" in G.nodes():
+        G.remove_node("Military")
+
+
+    k = 2.3/math.sqrt(G.order())
+    pos = nx.spring_layout(G, k=k) 
 
     # company, value = bipartite.sets(G)
     # subsituted with:
@@ -322,12 +352,6 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     companyDegree = nx.degree(G, company) 
     valueDegree = nx.degree(G, value)
 
-    if len(set1)>=20:
-        plt.figure(1,figsize=(25,15))
-    else: 
-        plt.figure(1,figsize=(15,10)) 
-    
-    plt.axis('off')
 
     # nodes
     nx.draw_networkx_nodes(G,
@@ -335,7 +359,7 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
                            nodelist=company,
                            node_color='r',
                            node_size=[v * 100 for v in dict(companyDegree).values()],
-                           alpha=0.3,
+                           alpha=0.25,
                            label=company)
 
     nx.draw_networkx_nodes(G,
@@ -343,16 +367,23 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
                            nodelist=value,
                            node_color='b',
                            node_size=[v * 200 for v in dict(valueDegree).values()],
-                           alpha=0.3,
+                           alpha=0.25,
                            label=value)
 
-    nx.draw_networkx_labels(G, pos, {n: n for n in company}, font_size=10)
-    nx.draw_networkx_labels(G, pos, {n: n for n in value}, font_size=10)
+    nx.draw_networkx_labels(G, pos, {n: n for n in company}, font_size=15)
+    nx.draw_networkx_labels(G, pos, {n: n for n in value}, font_size=15)
 
     # edges
-    nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.5)
+    nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.4)
 
-    return 
+
+    plt.axis('off')
+    axis = plt.gca()
+    axis.set_xlim([1.2*x for x in axis.get_xlim()])
+    axis.set_ylim([1.2*y for y in axis.get_ylim()])
+    plt.tight_layout()
+
+    return pos
 
 
 def degree_bip(G):

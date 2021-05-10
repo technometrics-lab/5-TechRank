@@ -181,6 +181,8 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
     f = open(f"text/iteration_tracker_{Mshape}.txt", "w")
     f.close()
 
+    stops_flag = 0
+
     for stream_data in weights:
         
         iteration = stream_data['iteration']
@@ -201,44 +203,62 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
         print(str1, file=f)
         f.close()
 
-        # test for convergence
-        if np.equal(rankdata,prev_rankdata).all(): # no changes
+        # stops in case algorithm does not change for some iterations
+        if stops_flag==500:
+            break
+
+        # test for convergence, in case break
+        elif np.equal(rankdata,prev_rankdata).all(): # no changes
+            if stops_flag==0:
+                convergence_iteration = iteration
+            stops_flag += 1
 
             # reappend two times to make plot flat
-            rankings.append(rankdata)
-            rankings.append(rankdata)
-            rankings.append(rankdata)
-            scores.append(data)
-            scores.append(data)
-            scores.append(data)
-
-            break
-        if iteration == 1000: # max limit
-            break
-        else: # go ahead
             rankings.append(rankdata)
             scores.append(data)
             prev_rankdata = rankdata
 
+        # max limit
+        elif iteration == 1000: 
+            break
+
+        # go ahead
+        else: 
+            rankings.append(rankdata)
+            scores.append(data)
+            prev_rankdata = rankdata
+            stops_flag = 0
+
             
     # print(iteration, rankdata)
     final_conf = rankdata
-
     
     # plot:
     if do_plot and iteration>2:
-        plt.figure(figsize=(10, 10))
-        plt.xlabel('Iteration', fontsize=14)
-        plt.ylabel('Rank, higher is better', fontsize=14)
-        plt.title(f'{name} rank evolution', fontsize=16)
-        p = plt.semilogx(range(1,iteration+3), rankings, '-,', alpha=0.5)
 
-       
+        params = {
+            'axes.labelsize': 22,
+            'axes.titlesize':24, 
+            'legend.fontsize': 22, 
+            'xtick.labelsize': 16, 
+            'ytick.labelsize': 16}
+
+        plt.figure(figsize=(10, 10))
+        plt.rcParams.update(params)
+        plt.xlabel('Iteration')
+        plt.ylabel('Rank, higher is better')
+        plt.title(f'{name} rank evolution')
+        plt.semilogx(range(1,len(rankings)+1), rankings, '-,', alpha=0.5)
+
+    print(convergence_iteration)
+    f = open(f"text/iteration_tracker_{Mshape}.txt", "a")
+    print(convergence_iteration, file=f)
+    f.close()
         
-    return {fit_or_ubiq:scores[-1], 
-            'iteration':iteration, 
-            'initial_conf':initial_conf, 
-            'final_conf':final_conf}
+    return {fit_or_ubiq: scores[-1], 
+            'iteration': convergence_iteration, 
+            'initial_conf': initial_conf, 
+            'final_conf': final_conf}
 
 
 def rank_df_class(convergence, dict_class):
