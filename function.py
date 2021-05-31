@@ -320,8 +320,6 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     
     plt.axis('off')
 
-
-
     if "Social Recruiting" in G.nodes():
         G.remove_node("Social Recruiting")
     if "Mobile" in G.nodes():

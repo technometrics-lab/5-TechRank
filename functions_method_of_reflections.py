@@ -168,6 +168,8 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
     elif fit_or_ubiq == 'ubiquity':
         name = 'Technologies'
         Mshape = M.shape[1]
+
+    print(name)
     
     rankings = list()
     scores = list()
@@ -198,13 +200,19 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
             initial_conf = rankdata
 
         # save on text
-        str1 = "Iteration number " + str(iteration) 
-        f = open(f"text/iteration_tracker_{Mshape}.txt", "a")
-        print(str1, file=f)
-        f.close()
+        #str1 = "Iteration number " + str(iteration) 
+        #f = open(f"text/iteration_tracker_{Mshape}.txt", "a")
+        #print(str1, file=f)
+        #f.close()
+
+        print(f"Iteration: {iteration} stops flag: {stops_flag}")
 
         # stops in case algorithm does not change for some iterations
-        if stops_flag==500:
+        if stops_flag==10:
+            print(f"converge at {iteration}")
+            for i in range(90):
+                rankings.append(rankdata)
+                scores.append(data)
             break
 
         # test for convergence, in case break
@@ -245,7 +253,7 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
 
         plt.figure(figsize=(10, 10))
         plt.rcParams.update(params)
-        plt.xlabel('Iteration')
+        plt.xlabel('Iterations')
         plt.ylabel('Rank, higher is better')
         plt.title(f'{name} rank evolution')
         plt.semilogx(range(1,len(rankings)+1), rankings, '-,', alpha=0.5)
