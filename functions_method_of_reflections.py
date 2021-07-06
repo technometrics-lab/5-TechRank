@@ -169,7 +169,7 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
         name = 'Technologies'
         Mshape = M.shape[1]
 
-    print(name)
+    #print(name)
     
     rankings = list()
     scores = list()
@@ -199,13 +199,7 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
             # print(iteration, rankdata)
             initial_conf = rankdata
 
-        # save on text
-        #str1 = "Iteration number " + str(iteration) 
-        #f = open(f"text/iteration_tracker_{Mshape}.txt", "a")
-        #print(str1, file=f)
-        #f.close()
-
-        print(f"Iteration: {iteration} stops flag: {stops_flag}")
+        # print(f"Iteration: {iteration} stops flag: {stops_flag}")
 
         # stops in case algorithm does not change for some iterations
         if stops_flag==10:
@@ -245,8 +239,8 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
     if do_plot and iteration>2:
 
         params = {
-            'axes.labelsize': 22,
-            'axes.titlesize':24, 
+            'axes.labelsize': 26,
+            'axes.titlesize':28, 
             'legend.fontsize': 22, 
             'xtick.labelsize': 16, 
             'ytick.labelsize': 16}
@@ -316,3 +310,45 @@ def rank_df_class(convergence, dict_class):
     
     return df_final, dict_class
 
+
+def w_star_analytic (M, alpha, beta, w_star_type):
+    """Find the weights evolution analytically
+    w^{*}_c (alpha,beta) = (\sum_{t=1}^{N_t} M_{ct}k_{t}^{-alpha})k_{c}^{-beta} 
+    w^{*}_t (alpha,beta) = (\sum_{c=1}^{N_c}  M_{ea}k_{c}^{-beta})k_{t}^{-alpha}
+    """
+    
+    k_c = M.sum(axis=1) # aka k_c summing over the rows
+    k_p = M.sum(axis=0) # aka k_p summering over the columns
+    
+    A = 1
+    B = 1
+    
+    def Gcp_denominateur(M, p, k_c, beta):
+        M_p = M[:,p]
+        k_c_beta = k_c ** (-1 * beta)
+        return np.dot(M_p, k_c_beta)
+    
+    def Gpc_denominateur(M, c, k_p, alpha):
+        M_c = M[c,:]
+        k_p_alpha = k_p ** (-1 * alpha)
+        return np.dot(M_c, k_p_alpha)
+    
+    if w_star_type == 'w_star_c':
+        w_star_c = np.zeros(shape=M.shape[0])
+
+        for c in range(M.shape[0]):
+            summand = Gpc_denominateur(M, c, k_p, alpha)
+            k_beta = (k_c[c] ** (-1 * beta))
+            w_star_c[c] = A * summand * k_beta
+
+        return w_star_c
+    
+    elif w_star_type == 'w_star_p':
+        w_star_p = np.zeros(shape=M.shape[1])
+    
+        for p in range(M.shape[1]):
+            summand = Gcp_denominateur(M, p, k_c, beta)
+            k_alpha = (k_p[p] ** (-1 * alpha))
+            w_star_p[p] = B * summand * k_alpha
+    
+        return w_star_p

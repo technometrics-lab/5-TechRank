@@ -1,4 +1,32 @@
 initial_position,final_configuration,degree,final_rank
+<<<<<<< HEAD
+7,Web Development,0,1.161
+8,Identity Management,0,1.161
+9,Computer,0,1.161
+10,Mobile Devices,0,1.161
+0,Virtualization,0,1.163
+1,Information Technology,0,1.163
+2,File Sharing,0,1.163
+3,Cloud Infrastructure,0,1.163
+5,Cloud Computing,0,1.163
+4,Blockchain,0,1.163
+11,Cloud Management,0,1.643
+12,SaaS,0,1.643
+13,Artificial Intelligence,0,1.643
+15,Developer APIs,0,1.837
+14,Data Integration,0,1.837
+6,Finance,0,2.119
+16,Network Security,0,2.319
+20,Privacy,0,2.402
+18,Risk Management,0,2.461
+17,Big Data,0,2.461
+19,Compliance,0,2.597
+21,Cloud Security,0,3.069
+22,Security,0,3.476
+23,Enterprise Software,0,3.503
+24,Cyber Security,0,3.79
+25,Software,0,4.581
+=======
 7,Web Development,1,1.162
 8,Identity Management,1,1.162
 9,Computer,1,1.162
@@ -25,3 +53,4 @@ initial_position,final_configuration,degree,final_rank
 23,Enterprise Software,5,3.503
 24,Cyber Security,6,3.789
 25,Software,8,4.58
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1

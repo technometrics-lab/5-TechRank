@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+35
+=======
 Iteration number 1
 Iteration number 2
 Iteration number 3
@@ -999,3 +1002,4 @@ Iteration number 998
 Iteration number 999
 Iteration number 1000
 299
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1

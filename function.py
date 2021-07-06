@@ -4,9 +4,13 @@ import os
 import requests
 import arrow
 import json
-import matplotlib.pyplot as plt
 import math
 import numpy as np
+<<<<<<< HEAD
+
+import matplotlib.pyplot as plt
+=======
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
 
 from typing import List, Dict
 from classes import Company, Investor, Technology
@@ -56,7 +60,7 @@ def CB_data_cleaning (
     to_check_double: Dict[str, str],
     drop_if_nan: List[str], 
     sort_by: str = ""):
-    """Performs the Data Cleaning part of the CB dataset
+    """ Performs the Data Cleaning part of the CB dataset
 
     Args:
         - df: dataset to clean
@@ -92,7 +96,7 @@ def CB_data_cleaning (
 
 
 def extract_data_from_column(column, get_what:str):
-    """Extracts data from complex columns
+    """ Extracts data from complex columns
 
     Args:
         - column: data to be changed
@@ -117,8 +121,8 @@ def extract_data_from_column(column, get_what:str):
 
 
 def extract_classes_company_tech(df):
-    """Extracts the dictionaries of Companies and Technologies 
-    from the dataset 
+    """ Extracts the dictionaries of Companies and Technologies 
+    from the dataset and create the network
     
     Args:
         - df: dataset
@@ -126,17 +130,23 @@ def extract_classes_company_tech(df):
     Return:
         - dict_companies: dictionary of companies
         - dict_tech: dictionary of technologies
+        - B: graph that links companies and technologies 
     """
     
     # dictionary of companies: name company: class Company
     dict_companies = {}
     # dictionary of technologies: name technology: class Technology
     dict_tech = {}
+    
     # initialization bipartite graph:
     B = nx.Graph()
     
     for index, row in df.iterrows():   
         
+<<<<<<< HEAD
+        # location extraction:
+=======
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
         if 'location_comp' in row:
             location_df = row['location_comp']
             location_company = {x.get('location_type'):x.get('value') for x in location_df}
@@ -147,6 +157,12 @@ def extract_classes_company_tech(df):
                 'city': row['city']
                 }
 
+<<<<<<< HEAD
+        # extraction latitude and longitude:
+        #lat, lon  = extract_coordinates_location(location_company)
+        lat = 0
+        lon = 0
+=======
         """
         location_company = {}
 
@@ -156,6 +172,7 @@ def extract_classes_company_tech(df):
             value = x['value']
             location_company[loc_type] = value
         """
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
     
         # Companies:
         comp_name = row['name']
@@ -163,7 +180,13 @@ def extract_classes_company_tech(df):
         c = Company(
             id = row['uuid'],
             name = comp_name,
+<<<<<<< HEAD
+            location = location_company,
+            lat = lat,
+            lon = lon
+=======
             location = location_company
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
                    )
 
         # if CB rank
@@ -193,9 +216,65 @@ def extract_classes_company_tech(df):
 
     return dict_companies, dict_tech, B
 
+def check_desc(line, words):
+    """Check if at more than one word in a set of words is included in line (a string)
+    """
+    
+    if isinstance(line, float): # line is not a string
+        return False
+    
+    if sum(w in line for w in words) > 1:
+    #if any(w in line for w in words):
+        return True
+    
+    return False
+
+
+def extract_class_investor(df):
+    """ Extracts the dictionaries of Investors attributes from the dataset 
+    
+    Args:
+        - df: dataset
+
+    Return:
+        - dict_inv: dictionary of investors
+    """
+
+    # dictionary of investors: name investments: class investors
+    dict_investors = {}
+    
+    for index, row in df.iterrows():   
+
+        location_investor = {
+            'country_code': row['country_code'], 
+            'region': row['region'], 
+            'city': row['city']
+            }  
+
+        # extraction latitude and longitude:
+        lat, lon  = extract_coordinates_location(location_company)
+
+        # Investor:
+        inv_name = row['name'] 
+
+        i = Investor(
+            id = row['uuid'],
+            name = inv_name,
+            type = row['type'],
+            location = location_investor,
+            lat = lat,
+            lon = lon,
+            investor_type = row['investor_types'],
+            investment_count = row['investment_count']
+            )
+        
+        dict_investors[inv_name] = i
+
+    return dict_investors
+    
 
 def nx_dip_graph_from_pandas(df):
-    """Creates the bipartite graph from the dataset
+    """ Creates the bipartite graph from the dataset
 
     bipartite = 0 => company
     bipartite = 1 => other value
@@ -233,7 +312,11 @@ def nx_dip_graph_from_pandas(df):
 
 
 def extract_nodes(G, bipartite_set) -> List:
+<<<<<<< HEAD
+    """ Extract nodes from the nodes of one of the bipartite sets
+=======
     """Extract nodes from the nodes of one of the bipartite sets
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
 
     Args:
         - G: graph
@@ -283,7 +366,7 @@ def filter_dict(G, percentage, set1, set2):
 
 
 def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
-    """Plots the bipartite network ...
+    """ Plots the bipartite network ...
 
     Args:
         - G: graph 
@@ -373,6 +456,7 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
 
     # edges
     nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.4)
+<<<<<<< HEAD
 
 
     plt.axis('off')
@@ -381,11 +465,21 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     axis.set_ylim([1.2*y for y in axis.get_ylim()])
     plt.tight_layout()
 
+=======
+
+
+    plt.axis('off')
+    axis = plt.gca()
+    axis.set_xlim([1.2*x for x in axis.get_xlim()])
+    axis.set_ylim([1.2*y for y in axis.get_ylim()])
+    plt.tight_layout()
+
+>>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
     return pos
 
 
 def degree_bip(G):
-    """Gives the degree of each node of the two bipartite graphs.
+    """ Gives the degree of each node of the two bipartite graphs.
 
     degree: number of links
 
@@ -407,8 +501,7 @@ def degree_bip(G):
 
 
 def insert_data_classes(dict_class: Dict, new_data: Dict, feature: str):
-
-    """
+    """ 
 
     Arg:
         - dict_class: (name, class)
@@ -430,5 +523,4 @@ def insert_data_classes(dict_class: Dict, new_data: Dict, feature: str):
         setattr(c, feature, value)
     
     return dict_class
-
 

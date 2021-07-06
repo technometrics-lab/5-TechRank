@@ -6,7 +6,9 @@ from typing import Dict
 class Company:
     id: str
     name: str
-    location: Dict[str, str]
+    location: Dict[str, str] # location divided in parts (city, state...)
+    lat: float =  0 # latitude of the location
+    lon: float =  0 # longitude of the location
     degree: float =  0
     rank_CB: float = 0
     rank_algo: float =  0
@@ -16,6 +18,12 @@ class Company:
 class Investor:
     id: str
     name: str
+    type: str
+    location: Dict[str, str]
+    investor_type: str
+    investment_count: int # number of investments
+    lat: float =  0 # latitude of the location
+    lon: float =  0 # longitude of the location
 
 @dataclasses.dataclass
 class Technology:
