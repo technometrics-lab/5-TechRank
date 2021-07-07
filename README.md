@@ -1,4 +1,5 @@
-# TECH-RANK algorithm
+TECH-RANK algorithm
+=======
 
 ## Scope
 

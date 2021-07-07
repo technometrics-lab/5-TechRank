@@ -11,7 +11,8 @@ class Company:
     lon: float =  0 # longitude of the location
     degree: float =  0
     rank_CB: float = 0
-    rank_algo: float =  0
+    rank_algo: float =  0 # rank obtained using the TechRank algorithm
+    rank_analytic: float = 0 # rank obtained using w_star_analytic (needed in the parameters optimization step)
 
 
 @dataclasses.dataclass
@@ -30,7 +31,8 @@ class Technology:
     name: str
     # score: float = 0
     degree: float =  0
-    rank_algo: float =  0
+    rank_algo: float =  0 # rank obtained using the TechRank algorithm
+    rank_analytic: float = 0 # rank obtained using w_star_analytic (needed in the parameters optimization step)
 
     def update_score(self, a: int):
         self.score = a
