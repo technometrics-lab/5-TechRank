@@ -6,11 +6,8 @@ import arrow
 import json
 import math
 import numpy as np
-<<<<<<< HEAD
 
 import matplotlib.pyplot as plt
-=======
->>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
 
 from typing import List, Dict
 from classes import Company, Investor, Technology
@@ -143,10 +140,7 @@ def extract_classes_company_tech(df):
     
     for index, row in df.iterrows():   
         
-<<<<<<< HEAD
         # location extraction:
-=======
->>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
         if 'location_comp' in row:
             location_df = row['location_comp']
             location_company = {x.get('location_type'):x.get('value') for x in location_df}
@@ -157,12 +151,10 @@ def extract_classes_company_tech(df):
                 'city': row['city']
                 }
 
-<<<<<<< HEAD
         # extraction latitude and longitude:
         #lat, lon  = extract_coordinates_location(location_company)
         lat = 0
         lon = 0
-=======
         """
         location_company = {}
 
@@ -172,7 +164,6 @@ def extract_classes_company_tech(df):
             value = x['value']
             location_company[loc_type] = value
         """
->>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
     
         # Companies:
         comp_name = row['name']
@@ -180,13 +171,7 @@ def extract_classes_company_tech(df):
         c = Company(
             id = row['uuid'],
             name = comp_name,
-<<<<<<< HEAD
-            location = location_company,
-            lat = lat,
-            lon = lon
-=======
             location = location_company
->>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
                    )
 
         # if CB rank
@@ -312,11 +297,7 @@ def nx_dip_graph_from_pandas(df):
 
 
 def extract_nodes(G, bipartite_set) -> List:
-<<<<<<< HEAD
-    """ Extract nodes from the nodes of one of the bipartite sets
-=======
     """Extract nodes from the nodes of one of the bipartite sets
->>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
 
     Args:
         - G: graph
@@ -456,7 +437,6 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
 
     # edges
     nx.draw_networkx_edges(G,pos,width=1.0,alpha=0.4)
-<<<<<<< HEAD
 
 
     plt.axis('off')
@@ -465,16 +445,6 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     axis.set_ylim([1.2*y for y in axis.get_ylim()])
     plt.tight_layout()
 
-=======
-
-
-    plt.axis('off')
-    axis = plt.gca()
-    axis.set_xlim([1.2*x for x in axis.get_xlim()])
-    axis.set_ylim([1.2*y for y in axis.get_ylim()])
-    plt.tight_layout()
-
->>>>>>> f7eb1fa81a7d0cde060c611e0db2cd7a6c72d9a1
     return pos
 
 
