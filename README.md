@@ -10,9 +10,10 @@ The code is a mix of notebooks and py file:
 - the _notebooks_ explain all the steps and work thanks to the py file.
 
 **Classes** 
-We work with 3 dataclasses: 'Companies', 'Technologies' and 'Investors'.
-In the notebook 'main.ipynb', we create the Companies and Technologies objects, while in 'investors.ipynb' the Investors Instances. All instances are saved as [pickle files](https://docs.python.org/3/library/pickle.html) in the 'classes' folder. 
-Please note that the Companies objects changes in 'investments.ipynb', so this notebook must be run after 'main.ipynb'.
+
+We work with 3 dataclasses: `Companies`, `Technologies` and `Investors`.
+In the notebook `main.ipynb`, we create the Companies and Technologies objects, while in `investors.ipynb` the Investors Instances. All instances are saved as [pickle files](https://docs.python.org/3/library/pickle.html) in the `classes` folder. 
+Please note that the Companies objects changes in `investments.ipynb`, so this notebook must be run after `main.ipynb`.
 
 ------
 ## Methodology
