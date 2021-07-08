@@ -163,6 +163,7 @@ def calibrate_analytic(M,
         
     return top_spearman
 
+    
 def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
     """Create the exogenous rank used as groundtruth for the model calibration. It accounts for the investors' preferences 
     including exogenous factors, such as previous investments, geographical distance ecc.

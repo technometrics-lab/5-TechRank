@@ -10,7 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from typing import List, Dict
-from classes import Company, Investor, Technology
+import classes
+#from classes import Company, Investor, Technology
 
 # import os.path
 
@@ -22,8 +23,7 @@ from networkx.algorithms import bipartite
 
 
 def df_from_api_CB (query, cb_table):
-    """
-    Creates the DataFrame of the data from the CrunchBase (CB) API
+    """Creates the DataFrame of the data from the CrunchBase (CB) API
 
     Args:
         - query: CB query that specifies what fields we are needed 
@@ -31,8 +31,6 @@ def df_from_api_CB (query, cb_table):
 
     Return:
         - df: DataFrame extracted from CB
-
-
     """
 
     api_key = os.getenv("CRUNCHBASE_API_KEY") # extract API key 
@@ -61,8 +59,7 @@ def CB_data_cleaning (
     to_check_double: Dict[str, str],
     drop_if_nan: List[str], 
     sort_by: str = ""):
-    """ 
-    Performs the Data Cleaning part of the CB dataset
+    """Performs the Data Cleaning part of the CB dataset
 
     Args:
         - df: dataset to clean
@@ -98,8 +95,7 @@ def CB_data_cleaning (
 
 
 def extract_data_from_column(column, get_what:str):
-    """ 
-     Extracts data from complex columns
+    """Extracts data from complex columns
 
     Args:
         - column: data to be changed
@@ -124,7 +120,7 @@ def extract_data_from_column(column, get_what:str):
 
 
 def extract_classes_company_tech(df):
-    """ Extracts the dictionaries of Companies and Technologies 
+    """Extracts the dictionaries of Companies and Technologies 
     from the dataset and create the network
     
     Args:
@@ -174,7 +170,7 @@ def extract_classes_company_tech(df):
         # Companies:
         comp_name = row['name']
 
-        c = Company(
+        c = classes.Company(
             id = row['uuid'],
             name = comp_name,
             location = location_company
@@ -193,13 +189,13 @@ def extract_classes_company_tech(df):
         # Technologies:
         if issubclass(type(row['category_groups']), List):
             for tech in row['category_groups']:
-                t = Technology(name=tech)
+                t = classes.Technology(name=tech)
                 dict_tech[tech] = t
 
                 B.add_node(tech, bipartite=1)
                 B.add_edge(comp_name, tech)
         else:
-            t = Technology(name=row['category_groups'])
+            t = classes.Technology(name=row['category_groups'])
             dict_tech[tech] = t   
 
             B.add_node(tech, bipartite=1)
@@ -249,7 +245,7 @@ def extract_class_investor(df):
         # Investor:
         inv_name = row['name'] 
 
-        i = Investor(
+        i = classes.Investor(
             id = row['uuid'],
             name = inv_name,
             type = row['type'],
