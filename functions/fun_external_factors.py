@@ -98,7 +98,7 @@ def calibrate_analytic(M,
         w_star_type = 'w_star_p'
     
     # Create the map:
-    squarelen = np.arange(10) # range in which iterate
+    squarelen = np.arange(50) # range in which iterate
     # map the position in the grid with the parameter value
     alpha_range = [index_function(x) for x in squarelen]
     beta_range = [index_function(x) for x in squarelen]
@@ -115,25 +115,29 @@ def calibrate_analytic(M,
             # find the analytic weights with that specific alpha and beta:
             [w_rank, dict] = w_star_analytic(M, alpha, beta, ua, dict_class) # it already returns a dictionary
             
-            # the next step was to create the dictout of the weights, but we already create it in the function w_star_analytic
-            #w_ranks = {name: w_converged[pos] for name, pos in comp_or_tech_dict.iteritems() }
+            # w_rank must be normalized to mach the exogenous rank structure
+            max_w_rank = max(w_rank.values())
+            w_rank = {name: inv/max_w_rank for (name, inv) in w_rank.items()}
+
             
             # We need to sort to use rank_comparison
             # note: operator.itemgetter(n) constructs a callable that assumes an iterable object 
             #       (e.g. list, tuple, set) as input, and fetches the n-th element out of it.
             #w_ranks_sorted = sorted(w_converged.iteritems(), key=operator.itemgetter(1))
-            w_ranks_sorted = w_rank #not sorting for now
+            #w_ranks_sorted = w_rank #not sorting for now
 
             
             # Spearman correlation between the created rank and the benchmark
-            spearman = rank_comparison(w_ranks_sorted, exogenous_rank)
+            spearman = rank_comparison(w_rank, exogenous_rank)
             
             # the spearman variable contains both the correlation and the pvalue:
             sper_corr = spearman[0]
             sper_pvalue = spearman[1]
-            print(f"alpha:{alpha}, beta:{beta} --> corr:{sper_corr} pvalue:{sper_pvalue}")
 
-            if sper_pvalue < 0.1: # statistically significant
+            #print(f"alpha:{alpha}, beta:{beta} --> corr:{sper_corr} pvalue:{sper_pvalue}")
+
+#################changed from 0.05 to 1
+            if sper_pvalue < 1: # statistically significant
                 landscape[alpha_index][beta_index] = sper_corr
                 
                 if (not top_spearman['spearman']) or (sper_corr > top_spearman['spearman']):
@@ -149,9 +153,18 @@ def calibrate_analytic(M,
 
     # plot
     if do_plot:
-        plt.figure(figsize=(10,10))
+
+        params = {
+            'axes.labelsize': 26,
+            'axes.titlesize':20, 
+            'legend.fontsize': 18, 
+            'xtick.labelsize': 10, 
+            'ytick.labelsize': 10}
+
+        plt.figure(figsize=(10, 10))
+        plt.rcParams.update(params)
         heatmap = plt.imshow(landscape, interpolation='nearest', vmin=-1, vmax=1)
-        #heatmap = plt.pcolor(landscape)
+        heatmap = plt.pcolor(landscape)
         colorbar = plt.colorbar(heatmap)
         plt.xlabel(r'$ \beta $')
         plt.xticks(squarelen, beta_range, rotation=90)
@@ -176,22 +189,54 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
         - exogenous_rank
     """
 
-    if sum(preferences.items)!=100: # the sum of all the preferences is not 100
+    if sum(preferences.values())!=100: # the sum of all the preferences is not 100
         print("Error: the investors' preferences percentage must sum to 100%")
         return
+
+    # initialize resulting dict
+    exogenous_rank = {name:0 for name in dict_class.keys()}
 
     # check which factors are included in the preferences
     # work on them if they are included and their preference percentage is >0
 
-    # previous investments 
+    # 1: amount previous investments -------------------------------------------------------------
     if "previous_investments" in preferences.keys() and preferences["previous_investments"]>0:
         if ua=='Technologies': # this factors makes sense only for companies
-            print("The previous invetsors factor can be applied only for companies, not technologies")
+            print("The previous investments factor can be applied only for companies, not technologies")
             return 
         
+
+        # dictionary name company: total_prev_inv
+        dict_comp_inv = {name: row.tot_previous_investments for (name, row) in dict_class.items()}
+
+        # normalize:
+        max_inv = max(dict_comp_inv.values())
+        dict_comp_inv_norm = {name: inv/max_inv for (name, inv) in dict_comp_inv.items()}
+
+        # update exogenous_rank
+        perc_contribution = preferences["previous_investments"]/100 # percentage of contribution 
+
+        for key, value in exogenous_rank.items():
+            exogenous_rank[key] = value + perc_contribution * dict_comp_inv_norm[key]
+    
+    # 2: Crunchbase -------------------------------------------------------------
+    if "crunchbase_rank" in preferences.keys() and preferences["crunchbase_rank"]>0:
+        if ua=='Technologies': # this factors makes sense only for companies
+            print("The CB rank factor can be applied only for companies, not technologies")
+            return 
         
-        
-    exogenous_rank = 0
+        # dictionary name company: CB rank       
+        dict_comp_cb = {name: row.rank_CB for (name, row) in dict_class.items()}
+        # normalize:
+        max_rank = max(dict_comp_cb.values())
+        dict_comp_cb_norm = {name: inv/max_rank for (name, inv) in dict_comp_cb.items()}
+
+
+        # update exogenous_rank
+        perc_contribution = preferences["previous_investments"]/100 # percentage of contribution 
+
+        for key, value in exogenous_rank.items():
+            exogenous_rank[key] = value + perc_contribution * dict_comp_cb_norm[key]
 
     return exogenous_rank
 

@@ -203,6 +203,52 @@ def extract_classes_company_tech(df):
 
     return dict_companies, dict_tech, B
 
+def extract_classes_investors(df):
+    """Extracts the dictionaries of Investors from the dataset
+    
+    Args:
+        - df: dataset
+
+    Return:
+        - dict_inv: dictionary of Investors
+    """
+    
+    # dictionary of investors: name investors: class Investor
+    dict_inv = {}
+    
+    for index, row in df.iterrows():   
+        
+        # location extraction:
+        if 'location_comp' in row:
+            location_df = row['location_comp']
+            location_company = {x.get('location_type'):x.get('value') for x in location_df}
+        else:
+            location_company = {
+                'country_code': row['country_code'], 
+                'region': row['region'], 
+                'city': row['city']
+                }
+
+        # extraction latitude and longitude:
+        #lat, lon  = extract_coordinates_location(location_company)
+        lat = 0
+        lon = 0
+    
+        # Companies:
+        inv_name = row['name']
+        investor_type = row['investor_types']
+
+        i = classes.Investor(
+            id = row['uuid'],
+            name = inv_name,
+            location = location_company,
+            investor_type = investor_type
+                   )
+        
+        dict_inv[inv_name] = i
+
+    return dict_inv
+
 
 def check_desc(line, words):
     """Check if at more than one word in a set of words is included in line (a string)
