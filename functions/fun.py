@@ -203,6 +203,7 @@ def extract_classes_company_tech(df):
 
     return dict_companies, dict_tech, B
 
+
 def extract_classes_investors(df):
     """Extracts the dictionaries of Investors from the dataset
     

@@ -6,6 +6,7 @@ import math
 import geopandas
 
 import pandas as pd
+import seaborn as sns
 import networkx as nx
 import scipy.stats as ss
 import matplotlib.pyplot as plt
@@ -98,7 +99,8 @@ def calibrate_analytic(M,
         w_star_type = 'w_star_p'
     
     # Create the map:
-    squarelen = np.arange(50) # range in which iterate
+    squarelen = np.arange(100) # range in which iterate
+
     # map the position in the grid with the parameter value
     alpha_range = [index_function(x) for x in squarelen]
     beta_range = [index_function(x) for x in squarelen]
@@ -118,13 +120,6 @@ def calibrate_analytic(M,
             # w_rank must be normalized to mach the exogenous rank structure
             max_w_rank = max(w_rank.values())
             w_rank = {name: inv/max_w_rank for (name, inv) in w_rank.items()}
-
-            
-            # We need to sort to use rank_comparison
-            # note: operator.itemgetter(n) constructs a callable that assumes an iterable object 
-            #       (e.g. list, tuple, set) as input, and fetches the n-th element out of it.
-            #w_ranks_sorted = sorted(w_converged.iteritems(), key=operator.itemgetter(1))
-            #w_ranks_sorted = w_rank #not sorting for now
 
             
             # Spearman correlation between the created rank and the benchmark
@@ -154,26 +149,33 @@ def calibrate_analytic(M,
     # plot
     if do_plot:
 
-        params = {
-            'axes.labelsize': 26,
-            'axes.titlesize':20, 
-            'legend.fontsize': 18, 
-            'xtick.labelsize': 10, 
-            'ytick.labelsize': 10}
+        params = {'axes.labelsize': 26, 'axes.titlesize':20, 'legend.fontsize': 18, 'xtick.labelsize': 10, 'ytick.labelsize': 10}
 
-        plt.figure(figsize=(10, 10))
+        fig,ax=plt.subplots(1,1, figsize=(10, 10))
         plt.rcParams.update(params)
         heatmap = plt.imshow(landscape, interpolation='nearest', vmin=-1, vmax=1)
         heatmap = plt.pcolor(landscape)
         colorbar = plt.colorbar(heatmap)
+        plt.locator_params(nbins=2, axis='x')
+
         plt.xlabel(r'$ \beta $')
         plt.xticks(squarelen, beta_range, rotation=90)
         plt.ylabel(r'$ \alpha $')
         plt.yticks(squarelen, alpha_range)
+
+        # reduce the density of ticks
+        for i, tick in enumerate(ax.yaxis.get_ticklabels()):
+            if i % 3 != 0:
+                tick.set_visible(False)
+        for i, tick in enumerate(ax.xaxis.get_ticklabels()):
+            if i % 3 != 0:
+                tick.set_visible(False)
+
         plt.title(title)
+        plt.show()
         
-        # to add: save files 
-        
+
+
     return top_spearman
 
     
