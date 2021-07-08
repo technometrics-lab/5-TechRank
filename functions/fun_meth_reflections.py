@@ -311,13 +311,14 @@ def rank_df_class(convergence, dict_class):
     return df_final, dict_class
 
 
-def w_star_analytic (M, alpha, beta, ua, dict_class):
+def w_star_analytic (M, alpha, beta, ua, dict_class=[]):
     """Find the weights evolution analytically
 
     Args:
         -
         - ua: defines if we are working with 'Technologies' or 'Companies'
-        - dict_class: dictionary (of companies or technologies) to update (only the rank_analytic attribute)
+        - dict_class: dictionary (of companies or technologies) to update (only the rank_analytic attribute).
+                      In case we don't pass it is zero
 
     w^{*}_c (alpha,beta) = (\sum_{t=1}^{N_t} M_{ct}k_{t}^{-alpha})k_{c}^{-beta} 
     w^{*}_t (alpha,beta) = (\sum_{c=1}^{N_c}  M_{ea}k_{c}^{-beta})k_{t}^{-alpha}
@@ -329,12 +330,12 @@ def w_star_analytic (M, alpha, beta, ua, dict_class):
     A = 1
     B = 1
     
-    def Gcp_denominateur(M, p, k_c, beta):
+    def Gcp_denominator(M, p, k_c, beta):
         M_p = M[:,p]
         k_c_beta = k_c ** (-1 * beta)
         return np.dot(M_p, k_c_beta)
     
-    def Gpc_denominateur(M, c, k_p, alpha):
+    def Gpc_denominator(M, c, k_p, alpha):
         M_c = M[c,:]
         k_p_alpha = k_p ** (-1 * alpha)
         return np.dot(M_c, k_p_alpha)
@@ -343,7 +344,7 @@ def w_star_analytic (M, alpha, beta, ua, dict_class):
         w_star = np.zeros(shape=M.shape[0])
 
         for c in range(M.shape[0]):
-            summand = Gpc_denominateur(M, c, k_p, alpha)
+            summand = Gpc_denominator(M, c, k_p, alpha)
             k_beta = (k_c[c] ** (-1 * beta))
             w_star[c] = A * summand * k_beta
     
@@ -351,19 +352,20 @@ def w_star_analytic (M, alpha, beta, ua, dict_class):
         w_star = np.zeros(shape=M.shape[1])
     
         for p in range(M.shape[1]):
-            summand = Gcp_denominateur(M, p, k_c, beta)
+            summand = Gcp_denominator(M, p, k_c, beta)
             k_alpha = (k_p[p] ** (-1 * alpha))
             w_star[p] = B * summand * k_alpha
   
     w_star_dict = {}
 
-    # Update the rank_analytic attribute
-    list_names = [*dict_class]
-    n = len(list_names)
-    for i in range(n):
-        name = list_names[i]
-        dict_class[name].rank_analytic = w_star[i]
-        w_star_dict[name] = w_star[i] # add element to the dict
-    
+    if len(dict_class)>0: # dict class has to be updated
+        # Update the rank_analytic attribute
+        list_names = [*dict_class]
+        n = len(list_names)
+        for i in range(n):
+            name = list_names[i]
+            dict_class[name].rank_analytic = w_star[i]
+            w_star_dict[name] = w_star[i] # add element to the dict
+        
     return w_star_dict, dict_class
 
