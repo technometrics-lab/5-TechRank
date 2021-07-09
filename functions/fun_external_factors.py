@@ -70,7 +70,8 @@ def calibrate_analytic(M,
                        exogenous_rank, 
                        index_function, 
                        title, 
-                       do_plot=False):
+                       do_plot=False,
+                       flag_cybersecurity = False):
     """ Returns the top parameters after the greed search
     
     Args:
@@ -82,6 +83,7 @@ def calibrate_analytic(M,
         - index_function: describe how mapping the area for the greed search
         - title: title of the plot (in case we have one)
         - do_plot: indicate if plotting
+        - flag_cybersecurity: identifies if we are in the cybersecurity field only
         
         
     Return:
@@ -131,7 +133,6 @@ def calibrate_analytic(M,
 
             #print(f"alpha:{alpha}, beta:{beta} --> corr:{sper_corr} pvalue:{sper_pvalue}")
 
-#################changed from 0.05 to 1
             if sper_pvalue < 1: # statistically significant
                 landscape[alpha_index][beta_index] = sper_corr
                 
@@ -172,8 +173,15 @@ def calibrate_analytic(M,
                 tick.set_visible(False)
 
         plt.title(title)
-        plt.show()
-        
+
+        # save
+        if flag_cybersecurity == False:
+            name_plot = f'plots/parameters_optimization/par_optim_{ua}_{len(dict_class)}'
+        else:
+            name_plot = f'plots/parameters_optimization/par_optim_cybersecurity_{ua}_{len(dict_class)}'
+
+        plt.savefig(f'{name_plot}.pdf')
+        plt.savefig(f'{name_plot}.png')
 
 
     return top_spearman
@@ -213,6 +221,11 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
 
         # normalize:
         max_inv = max(dict_comp_inv.values())
+
+        if max_inv == 0: 
+            print('Probably you have forgotten to first insert the data about previous investments')
+            return 
+
         dict_comp_inv_norm = {name: inv/max_inv for (name, inv) in dict_comp_inv.items()}
 
         # update exogenous_rank

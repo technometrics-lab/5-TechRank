@@ -6,7 +6,7 @@ import seaborn as sns
 import numpy as np
 
 
-def M_test_triangular(M):
+def M_test_triangular(M, flag_cybersecurity=False):
     # triangularize matrix
 
     user_edits_sum = M.sum(axis=1).flatten()
@@ -33,8 +33,14 @@ def M_test_triangular(M):
     plt.imshow(M_sorted_sorted, cmap=plt.cm.bone, interpolation='nearest')
     plt.xlabel("Technologies")
     plt.ylabel("Companies")
-    plt.savefig(f'plots/matrix_{str(M_sorted.shape)}.pdf')
-    plt.savefig(f'plots/matrix_{str(M_sorted.shape)}.png')
+
+    if flag_cybersecurity==False: # all fields
+        name_plot_M = f'plots/M_triangulize/matrix_{str(M_sorted.shape)}'
+    else: # only companies in cybersecurity
+        name_plot_M = f'plots/M_triangulize/cybersec_matrix_{str(M_sorted.shape)}'
+
+    plt.savefig(f'{name_plot_M}.pdf')
+    plt.savefig(f'{name_plot_M}.png')
     plt.show()
 
     return
