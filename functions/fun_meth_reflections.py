@@ -7,7 +7,7 @@ import numpy as np
 
 
 def M_test_triangular(M, flag_cybersecurity=False):
-    # triangularize matrix
+    """Test the triangularity of M matrix"""
 
     user_edits_sum = M.sum(axis=1).flatten()
     article_edits_sum = M.sum(axis=0).flatten()
@@ -20,14 +20,14 @@ def M_test_triangular(M, flag_cybersecurity=False):
     if len(M_sorted.shape)>2: # the matrix in inside the first
         M_sorted = M_sorted[0] # so it becomes of size 2
 
-    M_sorted_transponse = M_sorted.transpose()
+    M_sorted_transpose = M_sorted.transpose()
 
-    M_sorted_sorted_transponse = M_sorted_transponse[article_edits_order,:]
+    M_sorted_transpose = M_sorted_transpose[article_edits_order,:]
 
-    if len(M_sorted_sorted_transponse.shape)>2: # the matrix in inside the first
-        M_sorted_sorted_transponse = M_sorted_sorted_transponse[0] # so it becomes of size 2
+    if len(M_sorted_transpose.shape)>2: # the matrix in inside the first
+        M_sorted_transpose = M_sorted_transpose[0] # so it becomes of size 2
 
-    M_sorted_sorted = M_sorted_sorted_transponse.transpose()
+    M_sorted_sorted = M_sorted_transpose.transpose()
 
     plt.figure(figsize=(10,10))
     plt.imshow(M_sorted_sorted, cmap=plt.cm.bone, interpolation='nearest')
@@ -164,29 +164,38 @@ def w_stream(M, i, alpha, beta):
             break
 
 
-def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
-    '''finds the convergence point (or gives up after 1000 iterations)'''
+def find_convergence(M, alpha, beta, ua, do_plot=False, flag_cybersecurity=False):
+    '''TechRank evolution: finds the convergence point (or gives up after 1000 iterations)
+    
+    Args:
+        - M:
+        - alpha: optimal alpha (after calibration)
+        - beta: optimal beta (after calibration)
+        - ua: 'companies' or 'Technologies'
+        - flag_cybersecurity: identifies if we are in the cybersecurity field only
+        
+    Return: 
+        - 
+    '''
     
     # technologies or company
-    if fit_or_ubiq == 'fitness':
-        Mshape = M.shape[0]
-        name = 'Companies'
-    elif fit_or_ubiq == 'ubiquity':
-        name = 'Technologies'
-        Mshape = M.shape[1]
+    if ua == 'Companies':
+        M_shape = M.shape[0]
+    elif ua == 'Technologies':
+        M_shape = M.shape[1]
 
-    #print(name)
+    #print(ua)
     
     rankings = list()
     scores = list()
     
-    prev_rankdata = np.zeros(Mshape)
+    prev_rankdata = np.zeros(M_shape)
     iteration = 0
     
     weights = generator_order_w(M, alpha, beta)
 
     # open file
-    f = open(f"text/iteration_tracker_{Mshape}.txt", "w")
+    f = open(f"text/iteration_tracker_{M_shape}.txt", "w")
     f.close()
 
     stops_flag = 0
@@ -195,7 +204,7 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
         
         iteration = stream_data['iteration']
         
-        data = stream_data[fit_or_ubiq] # weights
+        data = stream_data[ua] # weights
         
         rankdata = data.argsort().argsort()
 
@@ -255,15 +264,24 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False):
         plt.rcParams.update(params)
         plt.xlabel('Iterations')
         plt.ylabel('Rank, higher is better')
-        plt.title(f'{name} rank evolution')
+        plt.title(f'{ua} rank evolution')
         plt.semilogx(range(1,len(rankings)+1), rankings, '-,', alpha=0.5)
 
+        # save figure 
+        if flag_cybersecurity==False:
+            name_plot = f'plots/rank_evolution/techrank_{ua}_{str(M_shape)}'
+        else:
+            name_plot = f'plots/rank_evolution/techrank_cybersecurity_{ua}_{str(M_shape)}'
+        plt.savefig(f'{name_plot}.pdf')
+        plt.savefig(f'{name_plot}.png')
+
+    # convergence iteration
     print(convergence_iteration)
-    f = open(f"text/iteration_tracker_{Mshape}.txt", "a")
+    f = open(f"text/iteration_tracker_{M_shape}.txt", "a")
     print(convergence_iteration, file=f)
     f.close()
         
-    return {fit_or_ubiq: scores[-1], 
+    return {ua: scores[-1], 
             'iteration': convergence_iteration, 
             'initial_conf': initial_conf, 
             'final_conf': final_conf}
@@ -275,9 +293,9 @@ def rank_df_class(convergence, dict_class):
     """
     
     if 'fitness' in convergence.keys():
-        fit_or_ubiq = 'fitness'
+        ua = 'fitness'
     elif 'ubiquity' in convergence.keys():
-        fit_or_ubiq = 'ubiquity'
+        ua = 'ubiquity'
     
     list_names = [*dict_class]
     
@@ -296,7 +314,7 @@ def rank_df_class(convergence, dict_class):
         
         ini_pos = convergence['initial_conf'][i] # initial position
         final_pos = convergence['final_conf'][i] # final position
-        rank = round(convergence[fit_or_ubiq][i], 3) # final rank rounded
+        rank = round(convergence[ua][i], 3) # final rank rounded
         degree = dict_class[name].degree
         
         df_final.loc[final_pos, 'final_configuration'] = name

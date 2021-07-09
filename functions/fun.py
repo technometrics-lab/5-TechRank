@@ -11,13 +11,8 @@ import matplotlib.pyplot as plt
 
 from typing import List, Dict
 import classes
-#from classes import Company, Investor, Technology
-
-# import os.path
 
 from pandas import json_normalize 
-# from dotenv import load_dotenv
-# load_dotenv(verbose=True)
 
 from networkx.algorithms import bipartite
 
