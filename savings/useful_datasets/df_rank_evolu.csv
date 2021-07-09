@@ -1,0 +1,2 @@
+,Unnamed: 0,number_iterations_tech,optimal_alpha_tech,time_conv_total,time_optimal_par_comp,number_iterations_comp,num_comp,time_conv_comp,num_tech,preferences_tech,time_optimal_par_tech,optimal_alpha_comp,optimal_beta_tech,time_conv_tech,preferences_comp,optimal_beta_comp
+0,,10,-2.0,1.3328242301940918,11.115349769592285,28,10,0.6153910160064697,26,{'previous_investments': 100},12.032558917999268,0.12,0.0,0.7174332141876221,"{'previous_investments': 100, 'crunchbase_rank': 0}",1.2

@@ -1,0 +1,27 @@
+initial_position,final_configuration,degree,final_rank
+4,Artificial Intelligence,0,0.052
+1,Data Integration,0,0.052
+10,Virtualization,0,0.052
+9,Information Technology,0,0.052
+14,File Sharing,0,0.052
+13,Cloud Infrastructure,0,0.052
+12,Cloud Computing,0,0.052
+11,Blockchain,0,0.052
+0,Developer APIs,0,0.052
+3,Cloud Management,0,0.052
+2,SaaS,0,0.052
+5,Identity Management,0,0.052
+6,Computer,0,0.052
+8,Web Development,0,0.052
+7,Mobile Devices,0,0.052
+15,Finance,0,0.052
+18,Risk Management,0,0.416
+16,Big Data,0,0.416
+17,Compliance,0,0.416
+19,Network Security,0,0.416
+21,Privacy,0,1.404
+20,Cloud Security,0,1.404
+22,Security,0,3.329
+23,Enterprise Software,0,6.501
+24,Cyber Security,0,11.234
+25,Software,0,26.63

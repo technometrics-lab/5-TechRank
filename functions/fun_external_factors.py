@@ -211,11 +211,7 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
 
     # 1: amount previous investments -------------------------------------------------------------
     if "previous_investments" in preferences.keys() and preferences["previous_investments"]>0:
-        if ua=='Technologies': # this factors makes sense only for companies
-            print("The previous investments factor can be applied only for companies, not technologies")
-            return 
-        
-
+       
         # dictionary name company: total_prev_inv
         dict_comp_inv = {name: row.tot_previous_investments for (name, row) in dict_class.items()}
 
@@ -233,6 +229,7 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
 
         for key, value in exogenous_rank.items():
             exogenous_rank[key] = value + perc_contribution * dict_comp_inv_norm[key]
+   
     
     # 2: Crunchbase -------------------------------------------------------------
     if "crunchbase_rank" in preferences.keys() and preferences["crunchbase_rank"]>0:

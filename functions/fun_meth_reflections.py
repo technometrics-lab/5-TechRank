@@ -164,27 +164,26 @@ def w_stream(M, i, alpha, beta):
             break
 
 
-def find_convergence(M, alpha, beta, ua, do_plot=False, flag_cybersecurity=False):
+def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False, flag_cybersecurity=False):
     '''TechRank evolution: finds the convergence point (or gives up after 1000 iterations)
     
     Args:
-        - M:
-        - alpha: optimal alpha (after calibration)
-        - beta: optimal beta (after calibration)
-        - ua: 'companies' or 'Technologies'
-        - flag_cybersecurity: identifies if we are in the cybersecurity field only
+        - 
         
     Return: 
         - 
+        
     '''
     
     # technologies or company
-    if ua == 'Companies':
+    if fit_or_ubiq == 'fitness':
         M_shape = M.shape[0]
-    elif ua == 'Technologies':
+        name = 'Companies'
+    elif fit_or_ubiq == 'ubiquity':
+        name = 'Technologies'
         M_shape = M.shape[1]
 
-    #print(ua)
+    #print(name)
     
     rankings = list()
     scores = list()
@@ -204,7 +203,7 @@ def find_convergence(M, alpha, beta, ua, do_plot=False, flag_cybersecurity=False
         
         iteration = stream_data['iteration']
         
-        data = stream_data[ua] # weights
+        data = stream_data[fit_or_ubiq] # weights
         
         rankdata = data.argsort().argsort()
 
@@ -264,14 +263,14 @@ def find_convergence(M, alpha, beta, ua, do_plot=False, flag_cybersecurity=False
         plt.rcParams.update(params)
         plt.xlabel('Iterations')
         plt.ylabel('Rank, higher is better')
-        plt.title(f'{ua} rank evolution')
+        plt.title(f'{name} rank evolution')
         plt.semilogx(range(1,len(rankings)+1), rankings, '-,', alpha=0.5)
 
         # save figure 
         if flag_cybersecurity==False:
-            name_plot = f'plots/rank_evolution/techrank_{ua}_{str(M_shape)}'
+            name_plot = f'plots/rank_evolution/techrank_{name}_{str(M_shape)}'
         else:
-            name_plot = f'plots/rank_evolution/techrank_cybersecurity_{ua}_{str(M_shape)}'
+            name_plot = f'plots/rank_evolution/techrank_cybersecurity_{name}_{str(M_shape)}'
         plt.savefig(f'{name_plot}.pdf')
         plt.savefig(f'{name_plot}.png')
 
@@ -281,7 +280,7 @@ def find_convergence(M, alpha, beta, ua, do_plot=False, flag_cybersecurity=False
     print(convergence_iteration, file=f)
     f.close()
         
-    return {ua: scores[-1], 
+    return {fit_or_ubiq: scores[-1], 
             'iteration': convergence_iteration, 
             'initial_conf': initial_conf, 
             'final_conf': final_conf}
@@ -293,9 +292,9 @@ def rank_df_class(convergence, dict_class):
     """
     
     if 'fitness' in convergence.keys():
-        ua = 'fitness'
+        fit_or_ubiq = 'fitness'
     elif 'ubiquity' in convergence.keys():
-        ua = 'ubiquity'
+        fit_or_ubiq = 'ubiquity'
     
     list_names = [*dict_class]
     
@@ -314,7 +313,7 @@ def rank_df_class(convergence, dict_class):
         
         ini_pos = convergence['initial_conf'][i] # initial position
         final_pos = convergence['final_conf'][i] # final position
-        rank = round(convergence[ua][i], 3) # final rank rounded
+        rank = round(convergence[fit_or_ubiq][i], 3) # final rank rounded
         degree = dict_class[name].degree
         
         df_final.loc[final_pos, 'final_configuration'] = name

@@ -135,7 +135,8 @@ def extract_classes_company_tech(df):
     # initialization bipartite graph:
     B = nx.Graph()
     
-    for index, row in df.iterrows():   
+    for index, row in df.iterrows(): # for each company
+
         
         # location extraction:
         if 'location_comp' in row:
@@ -168,7 +169,8 @@ def extract_classes_company_tech(df):
         c = classes.Company(
             id = row['uuid'],
             name = comp_name,
-            location = location_company
+            location = location_company,
+            technologies = row['category_groups']
                    )
 
         # if CB rank
@@ -188,12 +190,16 @@ def extract_classes_company_tech(df):
                 dict_tech[tech] = t
 
                 B.add_node(tech, bipartite=1)
+
+                # add edges
                 B.add_edge(comp_name, tech)
         else:
             t = classes.Technology(name=row['category_groups'])
             dict_tech[tech] = t   
 
             B.add_node(tech, bipartite=1)
+
+            # add edges
             B.add_edge(comp_name, tech)
 
     return dict_companies, dict_tech, B
