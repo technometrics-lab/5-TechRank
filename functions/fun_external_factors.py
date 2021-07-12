@@ -71,7 +71,8 @@ def calibrate_analytic(M,
                        index_function, 
                        title, 
                        do_plot=False,
-                       flag_cybersecurity = False):
+                       flag_cybersecurity = False,
+                       preferences = ''):
     """ Returns the top parameters after the greed search
     
     Args:
@@ -158,7 +159,6 @@ def calibrate_analytic(M,
         heatmap = plt.pcolor(landscape)
         colorbar = plt.colorbar(heatmap)
         plt.locator_params(nbins=2, axis='x')
-
         plt.xlabel(r'$ \beta $')
         plt.xticks(squarelen, beta_range, rotation=90)
         plt.ylabel(r'$ \alpha $')
@@ -176,9 +176,9 @@ def calibrate_analytic(M,
 
         # save
         if flag_cybersecurity == False:
-            name_plot = f'plots/parameters_optimization/par_optim_{ua}_{len(dict_class)}'
+            name_plot = f'plots/parameters_optimization/par_optim_{ua}_{len(dict_class)}_{str(preferences)}'
         else:
-            name_plot = f'plots/parameters_optimization/par_optim_cybersecurity_{ua}_{len(dict_class)}'
+            name_plot = f'plots/parameters_optimization/par_optim_cybersecurity_{ua}_{len(dict_class)}_{str(preferences)}'
 
         plt.savefig(f'{name_plot}.pdf')
         plt.savefig(f'{name_plot}.png')
@@ -223,7 +223,7 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
             return 
 
         dict_comp_inv_norm = {name: inv/max_inv for (name, inv) in dict_comp_inv.items()}
-
+ 
         # update exogenous_rank
         perc_contribution = preferences["previous_investments"]/100 # percentage of contribution 
 

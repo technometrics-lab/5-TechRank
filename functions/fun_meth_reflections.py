@@ -164,7 +164,13 @@ def w_stream(M, i, alpha, beta):
             break
 
 
-def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False, flag_cybersecurity=False):
+def find_convergence(M, 
+                    alpha, 
+                    beta, 
+                    fit_or_ubiq, 
+                    do_plot=False, 
+                    flag_cybersecurity=False,
+                    preferences = ''):
     '''TechRank evolution: finds the convergence point (or gives up after 1000 iterations)
     
     Args:
@@ -191,11 +197,9 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False, flag_cybersecur
     prev_rankdata = np.zeros(M_shape)
     iteration = 0
     
+
     weights = generator_order_w(M, alpha, beta)
 
-    # open file
-    f = open(f"text/iteration_tracker_{M_shape}.txt", "w")
-    f.close()
 
     stops_flag = 0
 
@@ -217,7 +221,8 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False, flag_cybersecur
 
         # stops in case algorithm does not change for some iterations
         if stops_flag==10:
-            print(f"converge at {iteration}")
+            print(f"Converge at {iteration}")
+            convergence_iteration = iteration
             for i in range(90):
                 rankings.append(rankdata)
                 scores.append(data)
@@ -236,6 +241,8 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False, flag_cybersecur
 
         # max limit
         elif iteration == 1000: 
+            print("We break becuase we reach a too high number of iterations")
+            convergence_iteration = iteration
             break
 
         # go ahead
@@ -268,17 +275,12 @@ def find_convergence(M, alpha, beta, fit_or_ubiq, do_plot=False, flag_cybersecur
 
         # save figure 
         if flag_cybersecurity==False:
-            name_plot = f'plots/rank_evolution/techrank_{name}_{str(M_shape)}'
+            name_plot = f'plots/rank_evolution/techrank_{name}_{str(M_shape)}_{str(preferences)}'
         else:
-            name_plot = f'plots/rank_evolution/techrank_cybersecurity_{name}_{str(M_shape)}'
+            name_plot = f'plots/rank_evolution/techrank_cybersecurity_{name}_{str(M_shape)}_{str(preferences)}'
         plt.savefig(f'{name_plot}.pdf')
         plt.savefig(f'{name_plot}.png')
 
-    # convergence iteration
-    print(convergence_iteration)
-    f = open(f"text/iteration_tracker_{M_shape}.txt", "a")
-    print(convergence_iteration, file=f)
-    f.close()
         
     return {fit_or_ubiq: scores[-1], 
             'iteration': convergence_iteration, 
@@ -301,9 +303,9 @@ def rank_df_class(convergence, dict_class):
     n = len(list_names)
 
     if hasattr(list_names[0], 'rank_CB'):
-        columns_final = ['initial_position', 'final_configuration', 'degree', 'final_rank', 'rank_CB']
+        columns_final = ['initial_position', 'final_configuration', 'degree', 'techrank', 'rank_CB']
     else:
-        columns_final = ['initial_position', 'final_configuration', 'degree', 'final_rank']
+        columns_final = ['initial_position', 'final_configuration', 'degree', 'techrank']
 
     df_final = pd.DataFrame(columns=columns_final, index=range(n))
     
@@ -319,7 +321,7 @@ def rank_df_class(convergence, dict_class):
         df_final.loc[final_pos, 'final_configuration'] = name
         df_final.loc[final_pos, 'degree'] = degree
         df_final.loc[final_pos, 'initial_position'] = ini_pos
-        df_final.loc[final_pos, 'final_rank'] = rank
+        df_final.loc[final_pos, 'techrank'] = rank
 
 
         if hasattr(dict_class[name], 'rank_CB'):

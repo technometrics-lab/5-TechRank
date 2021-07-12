@@ -1,0 +1,132 @@
+initial_position,final_configuration,degree,final_rank
+0,Wellness,0,1.0
+1,Cosmetics,0,1.0
+2,Beauty,0,1.0
+5,Home Renovation,0,1.0
+3,Home Improvement,0,1.0
+4,Home Services,0,1.0
+63,File Sharing,0,1.568
+65,Virtualization,0,1.568
+64,Cloud Infrastructure,0,1.568
+70,Identity Management,0,1.569
+69,Mobile Devices,0,1.569
+71,Web Development,0,1.569
+54,Enterprise Applications,0,1.653
+55,Quality Assurance,0,1.653
+53,Developer Platform,0,1.653
+51,Management Consulting,0,1.654
+52,Penetration Testing,0,1.654
+50,Professional Services,0,1.654
+39,Biometrics,0,1.837
+40,Wearables,0,1.837
+75,Insurance,0,1.865
+96,Data Center,0,1.874
+68,Optical Communication,0,1.874
+80,Real Time,0,2.024
+79,Predictive Analytics,0,2.025
+62,Marketing Automation,0,2.025
+82,Quantum Computing,0,2.025
+29,Automotive,0,2.025
+28,Manufacturing,0,2.025
+27,National Security,0,2.025
+30,Aerospace,0,2.025
+49,Messaging,0,2.026
+42,Drones,0,2.027
+43,Military,0,2.027
+18,AgTech,0,2.027
+16,Consumer Electronics,0,2.027
+15,Machinery Manufacturing,0,2.027
+17,Livestock,0,2.027
+14,Agriculture,0,2.069
+13,Cannabis,0,2.069
+12,Life Science,0,2.069
+36,Ticketing,0,2.216
+37,B2B,0,2.216
+58,Asset Management,0,2.217
+57,Financial Services,0,2.217
+44,Scheduling,0,2.217
+45,Virtual Assistant,0,2.217
+46,Productivity Tools,0,2.218
+24,Communications Infrastructure,0,2.22
+23,Unified Communications,0,2.22
+22,IT Infrastructure,0,2.22
+32,Therapeutics,0,2.332
+8,Retail,0,2.479
+7,E-Commerce,0,2.479
+6,Consumer Goods,0,2.479
+85,Cloud Data Services,0,2.48
+72,Training,0,2.481
+61,IT Management,0,2.481
+48,Infrastructure,0,2.481
+41,Video,0,2.482
+10,Energy Efficiency,0,2.483
+11,Energy,0,2.483
+9,Clean Energy,0,2.483
+20,Supply Chain Management,0,2.483
+21,Logistics,0,2.483
+93,Consulting,0,2.602
+87,Internet of Things,0,2.618
+34,Medical Device,0,2.696
+33,Biopharma,0,2.703
+47,Product Research,0,2.743
+73,Facial Recognition,0,2.859
+74,IaaS,0,2.864
+67,Finance,0,2.865
+35,Ad Targeting,0,2.865
+31,Customer Service,0,2.866
+38,Leisure,0,2.868
+26,Education,0,2.869
+25,E-Learning,0,2.869
+86,Developer Tools,0,2.923
+106,Developer APIs,0,3.078
+99,Software Engineering,0,3.078
+56,Medical,0,3.112
+81,PaaS,0,3.135
+97,Collaboration,0,3.136
+98,Cloud Management,0,3.136
+107,Web Apps,0,3.184
+77,Social Media,0,3.187
+91,Robotics,0,3.188
+19,Hospital,0,3.311
+89,Marketing,0,3.32
+94,Email,0,3.321
+101,Content,0,3.456
+78,Electronics,0,3.458
+76,Social Network,0,3.51
+59,Telecommunications,0,3.596
+108,Business Intelligence,0,3.612
+112,Cloud Computing,0,3.669
+105,Computer Vision,0,3.681
+90,Hardware,0,3.746
+104,Data Integration,0,3.77
+100,Industrial Automation,0,3.78
+60,Transportation,0,3.785
+88,Sensor,0,3.916
+84,Pharmaceutical,0,3.968
+95,Service Industry,0,4.055
+66,Travel,0,4.057
+102,Apps,0,4.102
+109,Analytics,0,4.47
+110,Open Source,0,4.586
+103,Mobile,0,4.795
+115,Risk Management,0,4.899
+92,Biotechnology,0,4.9
+111,Information Services,0,4.924
+114,Internet,0,4.99
+83,Health Care,0,5.052
+113,Mobile Apps,0,5.194
+117,Big Data,0,5.224
+119,Compliance,0,5.538
+118,Machine Learning,0,5.742
+116,Blockchain,0,6.142
+122,SaaS,0,6.45
+123,Cloud Security,0,6.862
+121,Privacy,0,6.87
+120,Artificial Intelligence,0,7.136
+124,Computer,0,7.444
+125,Enterprise Software,0,9.381
+126,Network Security,0,10.505
+127,Information Technology,0,12.08
+129,Security,0,14.352
+128,Software,0,15.035
+130,Cyber Security,0,15.891
