@@ -240,7 +240,7 @@ def find_convergence(M,
             prev_rankdata = rankdata
 
         # max limit
-        elif iteration == 1000: 
+        elif iteration == 5000: 
             print("We break becuase we reach a too high number of iterations")
             convergence_iteration = iteration
             break

@@ -1,0 +1,385 @@
+initial_position,final_configuration,degree,techrank,TeckRank_int
+1,Packaging Services,0,1.0,1.0
+2,Warehousing,0,1.0,2.0
+3,Stock Exchanges,0,1.0,3.0
+4,Public Relations,0,1.0,4.0
+0,Self-Storage,0,1.0,5.0
+242,Desktop Apps,0,4.414,6.0
+97,Personal Finance,0,4.414,7.0
+96,Ethereum,0,4.414,8.0
+112,Career Planning,0,4.414,9.0
+111,Social Recruiting,0,4.414,10.0
+61,Neuroscience,0,4.702,11.0
+60,Content Discovery,0,4.702,12.0
+115,Digital Marketing,0,4.702,13.0
+116,Creative Agency,0,4.702,14.0
+69,Assisted Living,0,4.702,15.0
+70,Elderly,0,4.702,16.0
+136,Linux,0,5.046,17.0
+193,Serious Games,0,5.046,18.0
+158,NFC,0,5.046,19.0
+139,3D Technology,0,5.046,20.0
+138,B2C,0,5.046,21.0
+58,Fast-Moving Consumer Goods,0,5.046,22.0
+59,Grocery,0,5.046,23.0
+82,Image Recognition,0,5.297,24.0
+159,Personal Branding,0,5.467,25.0
+180,Optical Communication,0,5.467,26.0
+54,Domain Registrar,0,5.467,27.0
+55,SEO,0,5.467,28.0
+189,Electronic Design Automation (EDA),0,5.467,29.0
+170,Last Mile Transportation,0,5.467,30.0
+163,Intellectual Property,0,5.467,31.0
+106,Drone Management,0,5.467,32.0
+145,Cycling,0,5.467,33.0
+102,Environmental Engineering,0,5.467,34.0
+248,E-Commerce Platforms,0,5.525,35.0
+160,Operating Systems,0,5.712,36.0
+262,InsurTech,0,5.857,37.0
+104,Professional Networking,0,5.997,38.0
+157,Marketing Automation,0,5.997,39.0
+155,mHealth,0,5.997,40.0
+131,Natural Language Processing,0,5.997,41.0
+141,Embedded Systems,0,5.997,42.0
+120,Meeting Software,0,5.997,43.0
+63,Virtual Workforce,0,5.997,44.0
+151,Mining Technology,0,5.997,45.0
+122,Local,0,5.997,46.0
+110,Mobile Advertising,0,5.997,47.0
+94,Livestock,0,5.997,48.0
+154,Clinical Trials,0,5.997,49.0
+279,Mobile Devices,0,6.142,50.0
+187,Assistive Technology,0,6.19,51.0
+208,Management Consulting,0,6.19,52.0
+207,Productivity Tools,0,6.377,53.0
+269,Intrusion Detection,0,6.503,54.0
+183,Call Center,0,6.517,55.0
+245,Elder Care,0,6.543,56.0
+196,Personalization,0,6.554,57.0
+228,Social,0,6.606,58.0
+150,Virtual Currency,0,6.69,59.0
+126,VoIP,0,6.69,60.0
+135,Ticketing,0,6.69,61.0
+134,Private Cloud,0,6.69,62.0
+95,Content Marketing,0,6.69,63.0
+146,Photography,0,6.69,64.0
+181,Virtual Desktop,0,6.69,65.0
+144,Building Material,0,6.69,66.0
+121,Unified Communications,0,6.69,67.0
+119,Virtual Assistant,0,6.69,68.0
+36,Local Business,0,6.69,69.0
+37,Local Advertising,0,6.69,70.0
+149,Lending,0,6.69,71.0
+51,Incubators,0,6.69,72.0
+161,Taxi Service,0,6.69,73.0
+153,Fitness,0,6.69,74.0
+41,Hotel,0,6.69,75.0
+40,Resorts,0,6.69,76.0
+148,Waste Management,0,6.69,77.0
+89,Online Games,0,6.69,78.0
+48,Health Diagnostics,0,6.691,79.0
+47,Alternative Medicine,0,6.691,80.0
+261,Reputation,0,6.893,81.0
+316,PaaS,0,6.967,82.0
+195,Home Health Care,0,6.978,83.0
+272,Virtual Reality,0,7.067,84.0
+230,Web Design,0,7.104,85.0
+281,Application Performance Management,0,7.168,86.0
+303,Virtualization,0,7.229,87.0
+285,Penetration Testing,0,7.236,88.0
+298,DRM,0,7.241,89.0
+182,Cannabis,0,7.271,90.0
+292,File Sharing,0,7.285,91.0
+101,Scheduling,0,7.369,92.0
+166,Corporate Training,0,7.414,93.0
+239,RFID,0,7.414,94.0
+176,Personal Health,0,7.416,95.0
+175,Recruiting,0,7.416,96.0
+273,Clean Energy,0,7.532,97.0
+258,Private Social Networking,0,7.576,98.0
+319,Cloud Infrastructure,0,7.596,99.0
+224,Price Comparison,0,7.613,100.0
+75,Video Streaming,0,7.648,101.0
+127,Charter Schools,0,7.648,102.0
+113,Trading Platform,0,7.649,103.0
+114,Cosmetic Surgery,0,7.649,104.0
+91,Freelance,0,7.649,105.0
+123,Facilities Support Services,0,7.649,106.0
+80,Plastics and Rubber Manufacturing,0,7.649,107.0
+109,Civil Engineering,0,7.649,108.0
+78,EBooks,0,7.649,109.0
+132,Railroad,0,7.649,110.0
+66,Auto Insurance,0,7.649,111.0
+118,Nuclear,0,7.649,112.0
+87,Jewelry,0,7.649,113.0
+129,Tourism,0,7.649,114.0
+44,Tutoring,0,7.649,115.0
+117,Electronic Health Record (EHR),0,7.649,116.0
+99,Wine And Spirits,0,7.649,117.0
+76,Green Building,0,7.649,118.0
+53,Craft Beer,0,7.649,119.0
+100,Dietary Supplements,0,7.649,120.0
+9,Music Streaming,0,7.65,121.0
+10,Independent Music,0,7.65,122.0
+296,IaaS,0,7.661,123.0
+282,Predictive Analytics,0,7.675,124.0
+172,Event Management,0,7.681,125.0
+275,Developer Platform,0,7.726,126.0
+236,Professional Services,0,7.754,127.0
+286,Data Integration,0,7.774,128.0
+244,Enterprise Applications,0,7.789,129.0
+254,Retail Technology,0,7.836,130.0
+308,Web Development,0,7.9,131.0
+171,Video Conferencing,0,7.909,132.0
+185,Web Browsers,0,7.909,133.0
+249,Contact Management,0,7.909,134.0
+203,Ediscovery,0,7.909,135.0
+79,Corrections Facilities,0,7.91,136.0
+305,Business Intelligence,0,7.964,137.0
+237,Smart Cities,0,7.982,138.0
+288,Computer Vision,0,7.983,139.0
+216,Therapeutics,0,7.998,140.0
+268,Location Based Services,0,8.005,141.0
+197,Hospitality,0,8.046,142.0
+192,Innovation Management,0,8.08,143.0
+200,Property Management,0,8.081,144.0
+199,Autonomous Vehicles,0,8.154,145.0
+210,Product Research,0,8.197,146.0
+107,AgTech,0,8.198,147.0
+314,Collaboration,0,8.206,148.0
+240,Consumer Goods,0,8.265,149.0
+218,Smart Building,0,8.282,150.0
+223,Semiconductor,0,8.285,151.0
+334,Software Engineering,0,8.304,152.0
+209,Transaction Processing,0,8.312,153.0
+169,Parking,0,8.327,154.0
+233,Wearables,0,8.445,155.0
+253,Project Management,0,8.445,156.0
+174,Crowdsourcing,0,8.526,157.0
+156,Financial Exchanges,0,8.574,158.0
+77,Universities,0,8.574,159.0
+68,Gaming,0,8.574,160.0
+142,Genetics,0,8.575,161.0
+222,Mapping Services,0,8.588,162.0
+277,Training,0,8.594,163.0
+211,Data Mining,0,8.646,164.0
+184,Machinery Manufacturing,0,8.646,165.0
+214,Life Science,0,8.688,166.0
+315,Cloud Management,0,8.736,167.0
+271,Social Network,0,8.77,168.0
+343,Messaging,0,8.808,169.0
+252,Biometrics,0,8.842,170.0
+229,Cloud Storage,0,8.909,171.0
+190,Wholesale,0,8.91,172.0
+307,Developer APIs,0,8.927,173.0
+301,Content,0,8.943,174.0
+289,E-Learning,0,8.957,175.0
+304,Web Apps,0,8.97,176.0
+355,Machine Learning,0,8.982,177.0
+246,Law Enforcement,0,8.996,178.0
+290,Sensor,0,9.019,179.0
+234,Data Storage,0,9.032,180.0
+313,B2B,0,9.052,181.0
+98,Facial Recognition,0,9.087,182.0
+83,In-Flight Entertainment,0,9.088,183.0
+56,Credit Cards,0,9.089,184.0
+81,Ad Targeting,0,9.089,185.0
+52,Small and Medium Businesses,0,9.09,186.0
+62,SMS,0,9.09,187.0
+84,Marine Technology,0,9.09,188.0
+46,Alumni,0,9.09,189.0
+26,Humanitarian,0,9.09,190.0
+88,Intelligent Systems,0,9.09,191.0
+72,Nanotechnology,0,9.09,192.0
+85,Advice,0,9.09,193.0
+74,Point of Sale,0,9.09,194.0
+50,Shipping,0,9.09,195.0
+93,Business Information Systems,0,9.09,196.0
+38,Dating,0,9.09,197.0
+86,Sharing Economy,0,9.09,198.0
+49,Geospatial,0,9.09,199.0
+11,E-Signature,0,9.09,200.0
+12,ISP,0,9.09,201.0
+90,Peer to Peer,0,9.09,202.0
+42,Architecture,0,9.09,203.0
+71,Ride Sharing,0,9.09,204.0
+92,Consumer Research,0,9.09,205.0
+28,Product Search,0,9.09,206.0
+21,Nightlife,0,9.09,207.0
+29,Video Games,0,9.09,208.0
+31,Facility Management,0,9.09,209.0
+65,Psychology,0,9.09,210.0
+67,Food Delivery,0,9.09,211.0
+45,Nursing and Residential Care,0,9.09,212.0
+43,Reservations,0,9.09,213.0
+35,Charity,0,9.09,214.0
+7,Angel Investment,0,9.09,215.0
+8,Property Development,0,9.09,216.0
+13,Sporting Goods,0,9.09,217.0
+14,Sports,0,9.09,218.0
+15,Travel Agency,0,9.09,219.0
+16,Travel Accommodations,0,9.09,220.0
+17,Power Grid,0,9.091,221.0
+18,Electrical Distribution,0,9.091,222.0
+22,Real Estate Investment,0,9.091,223.0
+6,Home Services,0,9.091,224.0
+5,Home Renovation,0,9.091,225.0
+352,Compliance,0,9.093,226.0
+147,Energy Efficiency,0,9.095,227.0
+173,iOS,0,9.095,228.0
+191,Freight Service,0,9.095,229.0
+179,Events,0,9.095,230.0
+128,Higher Education,0,9.095,231.0
+130,Cosmetics,0,9.095,232.0
+168,Space Travel,0,9.095,233.0
+64,Beauty,0,9.095,234.0
+143,Food Processing,0,9.095,235.0
+73,Digital Media,0,9.096,236.0
+243,Human Resources,0,9.18,237.0
+124,Energy Management,0,9.27,238.0
+125,Renewable Energy,0,9.27,239.0
+194,Navigation,0,9.275,240.0
+263,Military,0,9.367,241.0
+325,Homeland Security,0,9.392,242.0
+250,Medical Device,0,9.397,243.0
+259,Network Hardware,0,9.457,244.0
+267,Video,0,9.476,245.0
+310,Enterprise,0,9.536,246.0
+329,Developer Tools,0,9.563,247.0
+311,Legal,0,9.595,248.0
+278,Document Management,0,9.614,249.0
+338,Real Time,0,9.649,250.0
+205,Quality Assurance,0,9.654,251.0
+335,Data Center,0,9.691,252.0
+105,Farming,0,9.823,253.0
+323,IT Management,0,9.837,254.0
+202,Fraud Detection,0,9.878,255.0
+137,Management Information Systems,0,9.878,256.0
+20,Home Improvement,0,9.879,257.0
+360,Cloud Data Services,0,9.885,258.0
+366,CRM,0,9.892,259.0
+359,Cloud Computing,0,9.947,260.0
+264,Communications Infrastructure,0,9.988,261.0
+225,Venture Capital,0,10.026,262.0
+300,Social Media,0,10.057,263.0
+235,Smart Home,0,10.063,264.0
+299,Marketing,0,10.076,265.0
+306,Open Source,0,10.084,266.0
+295,Business Development,0,10.087,267.0
+320,Infrastructure,0,10.094,268.0
+370,SaaS,0,10.113,269.0
+364,Big Data,0,10.126,270.0
+348,Identity Management,0,10.132,271.0
+201,Shopping,0,10.135,272.0
+287,Supply Chain Management,0,10.144,273.0
+302,IT Infrastructure,0,10.178,274.0
+336,Database,0,10.186,275.0
+363,Risk Management,0,10.192,276.0
+274,Association,0,10.233,277.0
+346,National Security,0,10.282,278.0
+188,Online Portals,0,10.309,279.0
+226,Lifestyle,0,10.309,280.0
+217,Mobile Payments,0,10.327,281.0
+204,Customer Service,0,10.371,282.0
+213,Biopharma,0,10.371,283.0
+283,Pharmaceutical,0,10.376,284.0
+265,Email,0,10.43,285.0
+251,Wellness,0,10.434,286.0
+353,Government,0,10.443,287.0
+162,Satellite Communication,0,10.455,288.0
+369,Analytics,0,10.461,289.0
+260,Industrial Manufacturing,0,10.561,290.0
+339,Physical Security,0,10.576,291.0
+317,Transportation,0,10.612,292.0
+349,Mobile Apps,0,10.627,293.0
+231,Industrial,0,10.675,294.0
+103,Rental,0,10.735,295.0
+227,Wireless,0,10.774,296.0
+206,Android,0,10.774,297.0
+324,FinTech,0,10.79,298.0
+375,Cloud Security,0,10.828,299.0
+354,Hardware,0,10.86,300.0
+341,Automotive,0,10.886,301.0
+321,Product Design,0,10.929,302.0
+345,Cryptocurrency,0,10.965,303.0
+220,Marketplace,0,11.028,304.0
+212,Industrial Engineering,0,11.049,305.0
+365,Artificial Intelligence,0,11.116,306.0
+270,Drones,0,11.136,307.0
+362,Robotics,0,11.143,308.0
+219,Data Visualization,0,11.146,309.0
+133,Information and Communications Technology (ICT),0,11.238,310.0
+167,Environmental Consulting,0,11.239,311.0
+140,Technical Support,0,11.239,312.0
+34,Janitorial Service,0,11.223,313.0
+332,Web Hosting,0,11.251,314.0
+255,Food and Beverage,0,11.272,315.0
+247,Bitcoin,0,11.273,316.0
+280,Search Engine,0,11.279,317.0
+333,Service Industry,0,11.284,318.0
+361,Blockchain,0,11.347,319.0
+241,Agriculture,0,11.349,320.0
+33,Staffing Agency,0,11.336,321.0
+344,Telecommunications,0,11.4,322.0
+291,Retail,0,11.405,323.0
+293,Consumer,0,11.412,324.0
+232,Communities,0,11.413,325.0
+357,Internet of Things,0,11.436,326.0
+367,Apps,0,11.449,327.0
+221,Market Research,0,11.461,328.0
+328,Finance,0,11.5,329.0
+257,Quantum Computing,0,11.508,330.0
+356,Consumer Electronics,0,11.509,331.0
+309,Medical,0,11.519,332.0
+215,Fashion,0,11.542,333.0
+23,Social Entrepreneurship,0,11.593,334.0
+24,Politics,0,11.593,335.0
+27,Test and Measurement,0,11.593,336.0
+30,Wealth Management,0,11.594,337.0
+25,CleanTech,0,11.594,338.0
+32,Furniture,0,11.594,339.0
+19,Cooking,0,11.595,340.0
+318,Industrial Automation,0,11.655,341.0
+312,Asset Management,0,11.664,342.0
+376,Privacy,0,11.725,343.0
+371,Enterprise Software,0,11.743,344.0
+198,Hospital,0,11.788,345.0
+276,Biotechnology,0,11.793,346.0
+256,Advertising,0,11.844,347.0
+351,Electronics,0,11.946,348.0
+238,Real Estate,0,12.008,349.0
+327,Public Safety,0,12.078,350.0
+340,Payments,0,12.245,351.0
+368,Mobile,0,12.301,352.0
+322,Logistics,0,12.332,353.0
+342,Education,0,12.372,354.0
+152,Media and Entertainment,0,12.519,355.0
+331,Travel,0,12.743,356.0
+165,Air Transportation,0,12.807,357.0
+326,Insurance,0,12.901,358.0
+347,E-Commerce,0,12.981,359.0
+297,Energy,0,13.327,360.0
+374,Information Services,0,13.345,361.0
+373,Consulting,0,13.512,362.0
+178,Leisure,0,13.597,363.0
+266,Banking,0,13.76,364.0
+294,Non Profit,0,13.914,365.0
+164,Mechanical Engineering,0,13.979,366.0
+39,Music,0,14.002,367.0
+379,Network Security,0,14.042,368.0
+378,Computer,0,14.347,369.0
+377,Internet,0,14.422,370.0
+350,Health Care,0,14.471,371.0
+358,Aerospace,0,14.477,372.0
+57,Commercial,0,14.488,373.0
+186,Chemical,0,14.549,374.0
+337,Financial Services,0,14.828,375.0
+372,Manufacturing,0,14.958,376.0
+284,Construction,0,15.142,377.0
+381,Cyber Security,0,15.316,378.0
+330,Oil and Gas,0,15.336,379.0
+380,Software,0,16.217,380.0
+382,Security,0,16.774,381.0
+383,Information Technology,0,16.842,382.0
+177,Publishing,0,17.009,383.0
+108,News,0,17.538,384.0

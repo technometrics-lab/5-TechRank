@@ -55,8 +55,8 @@ reload(classes)
 #size_comp = [10, 100, 500, 1000, 1499, 1999, 2442]
 #size_tech = [26, 131, 305, 384, 431, 456, 478]
 
-size_comp = [10, 100, 500]
-size_tech = [26, 131, 305]
+size_comp = [1000, 1499, 1999, 2442]
+size_tech = [384, 431, 456, 478]
 
 preferences_comp = {"previous_investments":100,
                     "crunchbase_rank":0}
@@ -201,6 +201,9 @@ for i in range(len(size_comp)):
                     'spearman_corr_with_cb': spear_corr['rank_CB_normlized']['TeckRank_int']
                 }
         df_rank_evolu = df_rank_evolu.append(new_row, ignore_index=True)
+
+    df_rank_evolu.to_csv('savings/useful_datasets/df_rank_evolu.csv')
+    print("salvato")
     
  
 
