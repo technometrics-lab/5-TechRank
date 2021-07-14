@@ -113,7 +113,7 @@ def calibrate_analytic(M,
     # Structure of the result
     top_spearman = {'spearman':None,'alpha':None, 'beta':None, 'ua':ua}
 
-    # Greed search among all alphas and all betas
+    # Grid search among all alphas and all betas
     for alpha_index, alpha in enumerate(alpha_range): #_index is the count of the current iteration
         for beta_index, beta in enumerate(beta_range):
             

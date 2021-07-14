@@ -177,7 +177,9 @@ for i in range(len(size_comp)):
     if ((df_rank_evolu['num_comp'] == num_comp) &
         (df_rank_evolu['num_tech'] == num_tech) &
         (df_rank_evolu['preferences_comp'] == str(preferences_comp)) &
-        (df_rank_evolu['preferences_tech'] == str(preferences_tech))
+        (df_rank_evolu['preferences_tech'] == str(preferences_tech)) &
+        (df_rank_evolu['number_iterations_comp'] == convergence_comp['iteration'])&
+        (df_rank_evolu['number_iterations_tech'] == convergence_tech['iteration'])
         ).any(): # present
 
         print("Already analysed")
@@ -203,7 +205,6 @@ for i in range(len(size_comp)):
         df_rank_evolu = df_rank_evolu.append(new_row, ignore_index=True)
 
     df_rank_evolu.to_csv('savings/useful_datasets/df_rank_evolu.csv')
-    print("salvato")
     
  
 
