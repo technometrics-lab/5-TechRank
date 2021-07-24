@@ -60,10 +60,10 @@ reload(classes)
 # medicine
 # size_comp = [10, 100, 999, 4996, 9974, 14954, 19938, 25203]
 # size_tech = [32, 95, 254, 437, 507, 549, 586, 604]
-size_comp = [2442]
-size_tech = [478]
+size_comp = [500, 1499, 1999]#, 2997]
+size_tech = [199, 290, 326]#, 368]
 
-flag_cybersecurity = True
+flag_cybersecurity = False
 
 preferences_comp = {"previous_investments":100,
                     "crunchbase_rank":0}
