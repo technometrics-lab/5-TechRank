@@ -30,8 +30,8 @@ from typing import List
 
 import functions.fun
 reload(functions.fun)
-from functions.fun import CB_data_cleaning, df_from_api_CB, extract_nodes, extract_data_from_column
-from functions.fun import nx_dip_graph_from_pandas, filter_dict, check_desc
+from functions.fun import CB_data_cleaning, df_from_api_CB, extract_nodes, extract_data_from_column, field_extraction
+from functions.fun import nx_dip_graph_from_pandas, plot_bipartite_graph, filter_dict, check_desc
 from functions.fun import extract_classes_company_tech, degree_bip, insert_data_classes
 
 # import functions from py file 
@@ -52,11 +52,18 @@ from functions.fun_external_factors import rank_comparison, calibrate_analytic, 
 import classes
 reload(classes)
 
+# cybersecurity
 #size_comp = [10, 100, 500, 1000, 1499, 1999, 2442]
 #size_tech = [26, 131, 305, 384, 431, 456, 478]
+#flag_cybersecurity = True
 
-size_comp = [1000, 1499, 1999, 2442]
-size_tech = [384, 431, 456, 478]
+# medicine
+# size_comp = [10, 100, 999, 4996, 9974, 14954, 19938, 25203]
+# size_tech = [32, 95, 254, 437, 507, 549, 586, 604]
+size_comp = [2442]
+size_tech = [478]
+
+flag_cybersecurity = True
 
 preferences_comp = {"previous_investments":100,
                     "crunchbase_rank":0}
@@ -67,12 +74,15 @@ for i in range(len(size_comp)):
     num_tech = size_tech[i]
     
     print(f'\n\n num comp:{num_comp}, num tech: {num_tech}\n')
-    
-    name_file_com = f'savings/classes/dict_companies_cybersecurity_{num_comp}.pickle'
-    name_file_tech = f'savings/classes/dict_tech_cybersecurity_{num_tech}.pickle'
-    name_file_graph = f'savings/networks/cybersecurity_comp_{num_comp}_tech_{num_tech}.gpickle'
-    name_M = f'savings/M/cybersecurity_comp_{num_comp}_tech_{num_tech}.npy'
-    flag_cybersecurity = True
+
+    if flag_cybersecurity==False: # all fields
+        name_file_com = f'savings/classes/dict_companies_{num_comp}.pickle'
+        name_file_tech = f'savings/classes/dict_tech_{num_tech}.pickle'
+        name_file_graph = f'savings/networks/comp_{num_comp}_tech_{num_tech}.gpickle'
+    else: # only companies in cybersecurity
+        name_file_com = f'savings/classes/dict_companies_cybersecurity_{num_comp}.pickle'
+        name_file_tech = f'savings/classes/dict_tech_cybersecurity_{num_tech}.pickle'
+        name_file_graph = f'savings/networks/cybersecurity_comp_{num_comp}_tech_{num_tech}.gpickle'
 
     with open(name_file_com, 'rb') as f:
         dict_companies = pickle.load(f)
@@ -110,7 +120,8 @@ for i in range(len(size_comp)):
                        index_function=lambda x: (x-50)/25,
                        title='Correlation for Companies',
                        do_plot=True,
-                       preferences = preferences_comp)
+                       preferences = preferences_comp,
+                       flag_cybersecurity = flag_cybersecurity)
     end_time = time.time()
     time_optimal_par_comp = end_time - start_time
     optimal_alpha_comp = best_par['alpha']
@@ -124,7 +135,8 @@ for i in range(len(size_comp)):
                        index_function=lambda x: (x-50)/25,
                        title='Correlation for Companies',
                        do_plot=True,
-                       preferences = preferences_tech)
+                       preferences = preferences_tech,
+                       flag_cybersecurity = flag_cybersecurity)
     end_time = time.time()
     optimal_alpha_tech = best_par['alpha']
     optimal_beta_tech = best_par['beta']
@@ -152,7 +164,13 @@ for i in range(len(size_comp)):
     df_spearman = df_spearman.astype(float)
     df_spearman["name"] = df_final_companies['final_configuration']
     df_spearman.set_index("name")
-    name = "savings/csv_results/complete_companies_" + str(len(dict_companies)) + "_" + str(preferences_comp) + ".csv"
+
+
+    if flag_cybersecurity==False:
+        name = "savings/csv_results/cybersecurity/complete_companies_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+    else:
+        name = "savings/csv_results/complete_companies_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+   
     df_final_companies.to_csv(name, index = False, header=True)
 
     spear_corr = df_spearman.corr(method='spearman')
@@ -169,10 +187,20 @@ for i in range(len(size_comp)):
     time_conv_tech = end_time - start_time
     df_final_tech, dict_tech = rank_df_class(convergence_tech, dict_tech)
     df_final_tech['TeckRank_int'] = df_final_tech.index + 1.0
-    name = "savings/csv_results/complete_tech_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+
+    if flag_cybersecurity==False:
+        name = "savings/csv_results/cybersecurity/complete_tech_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+    else:
+        name = "savings/csv_results/complete_tech_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+
     df_final_tech.to_csv(name, index = False, header=True)
 
-    df_rank_evolu = pd.read_csv('savings/useful_datasets/df_rank_evolu.csv')
+    if flag_cybersecurity==True:
+        name_csv = 'savings/useful_datasets/cybersecurity_df_rank_evolu.csv'
+    else:
+        name_csv = 'savings/useful_datasets/df_rank_evolu.csv'
+    
+    df_rank_evolu = pd.read_csv(name_csv)
     # check if that specific case is already in the csv
     if ((df_rank_evolu['num_comp'] == num_comp) &
         (df_rank_evolu['num_tech'] == num_tech) &
@@ -204,7 +232,8 @@ for i in range(len(size_comp)):
                 }
         df_rank_evolu = df_rank_evolu.append(new_row, ignore_index=True)
 
-    df_rank_evolu.to_csv('savings/useful_datasets/df_rank_evolu.csv')
+    df_rank_evolu = df_rank_evolu.drop(['Unnamed: 0'], axis=1)
+    df_rank_evolu.to_csv(name_csv)
     
  
 

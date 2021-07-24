@@ -198,3 +198,6 @@ data/
 company.json/
 classes/
 classes/dict_companies.pickle
+plots/
+savings/
+

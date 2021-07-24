@@ -1,27 +1,27 @@
 initial_position,final_configuration,degree,techrank,TeckRank_int
-4,Artificial Intelligence,0,0.052,1.0
-1,Data Integration,0,0.052,2.0
-10,Virtualization,0,0.052,3.0
-9,Information Technology,0,0.052,4.0
-14,File Sharing,0,0.052,5.0
-13,Cloud Infrastructure,0,0.052,6.0
-12,Cloud Computing,0,0.052,7.0
-11,Blockchain,0,0.052,8.0
-0,Developer APIs,0,0.052,9.0
-3,Cloud Management,0,0.052,10.0
-2,SaaS,0,0.052,11.0
-5,Identity Management,0,0.052,12.0
-6,Computer,0,0.052,13.0
-8,Web Development,0,0.052,14.0
-7,Mobile Devices,0,0.052,15.0
-15,Finance,0,0.052,16.0
-18,Risk Management,0,0.416,17.0
-16,Big Data,0,0.416,18.0
-17,Compliance,0,0.416,19.0
-19,Network Security,0,0.416,20.0
-21,Privacy,0,1.404,21.0
-20,Cloud Security,0,1.404,22.0
-22,Security,0,3.329,23.0
-23,Enterprise Software,0,6.501,24.0
-24,Cyber Security,0,11.234,25.0
-25,Software,0,26.63,26.0
+4,Artificial Intelligence,0,0.062,1.0
+5,Big Data,0,0.062,2.0
+6,Virtualization,0,0.062,3.0
+7,File Sharing,0,0.062,4.0
+8,Cloud Infrastructure,0,0.062,5.0
+9,Cloud Computing,0,0.062,6.0
+10,Blockchain,0,0.062,7.0
+0,Developer APIs,0,0.062,8.0
+1,Network Security,0,0.062,9.0
+2,Cloud Management,0,0.062,10.0
+3,SaaS,0,0.062,11.0
+11,Smart Home,0,0.064,12.0
+12,Sensor,0,0.064,13.0
+13,Consumer Electronics,0,0.064,14.0
+15,Risk Management,0,0.497,15.0
+17,Privacy,0,0.497,16.0
+16,Information Technology,0,0.497,17.0
+14,Compliance,0,0.498,18.0
+18,Advertising,0,1.0,19.0
+19,Digital Marketing,0,1.0,20.0
+20,Marketing,0,1.0,21.0
+21,Enterprise Software,0,1.68,22.0
+23,Security,0,1.697,23.0
+22,Cloud Security,0,3.985,24.0
+24,Cyber Security,0,13.438,25.0
+25,Software,0,21.334,26.0

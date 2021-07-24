@@ -27,12 +27,20 @@ def M_test_triangular(M, flag_cybersecurity=False):
     if len(M_sorted_transpose.shape)>2: # the matrix in inside the first
         M_sorted_transpose = M_sorted_transpose[0] # so it becomes of size 2
 
-    M_sorted_sorted = M_sorted_transpose.transpose()
+    M_sorted_sorted = M_sorted_transpose#.transpose()
 
-    plt.figure(figsize=(10,10))
+    params = {
+        'axes.labelsize': 18,
+        'axes.titlesize':28, 
+        'legend.fontsize': 22, 
+        'xtick.labelsize': 16, 
+        'ytick.labelsize': 16}
+
+    plt.figure(figsize=(10, 10))
+    plt.rcParams.update(params)
     plt.imshow(M_sorted_sorted, cmap=plt.cm.bone, interpolation='nearest')
-    plt.xlabel("Technologies")
-    plt.ylabel("Companies")
+    plt.xlabel("Companies")
+    plt.ylabel("Technologies")
 
     if flag_cybersecurity==False: # all fields
         name_plot_M = f'plots/M_triangulize/matrix_{str(M_sorted.shape)}'
@@ -308,8 +316,13 @@ def rank_df_class(convergence, dict_class):
         columns_final = ['initial_position', 'final_configuration', 'degree', 'techrank']
 
     df_final = pd.DataFrame(columns=columns_final, index=range(n))
+
+    # print(f"----{n}----{len(convergence['initial_conf'])}----")
+    if n>len(convergence['initial_conf']):
+        n = n-1
     
     for i in range(n):
+        # print(i)
         
         name = list_names[i]
         
@@ -387,6 +400,11 @@ def w_star_analytic (M, alpha, beta, ua, dict_class=[]):
         # Update the rank_analytic attribute
         list_names = [*dict_class]
         n = len(list_names)
+
+        #print(f"n: {n} -- w_star: {len(w_star)}")
+        if n>len(w_star):
+            n = len(w_star)
+
         for i in range(n):
             name = list_names[i]
             dict_class[name].rank_analytic = w_star[i]

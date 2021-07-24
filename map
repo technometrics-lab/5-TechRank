@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API 0.7.56.9 76e5016d">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2021-07-16T14:58:28Z"/>
+
+  <bounds minlat="27.9660000" minlon="-122.4200000" maxlat="42.3750000" maxlon="-71.1060000"/>
+
+<remark> runtime error: Query timed out in "bbox-query" at line 1 after 181 seconds. </remark>
+
+</osm>

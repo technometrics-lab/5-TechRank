@@ -89,6 +89,97 @@ def CB_data_cleaning (
     return df
 
 
+def field_extraction (field_name: str, df: pd.DataFrame):
+    """Extract only companies in a specific field according to the words contained in 
+    the description
+    
+    Arg:
+        - field_name: name of the field
+        
+    Return:
+        - 
+    """
+
+    flag_cybersecurity = False
+    
+    if field_name == 'cybersecurity':
+        field_words = [
+                        "cybersecurity"
+                        "confidentiality",
+                        "integrity",
+                        "availability",
+                        "secure",
+                        "security",
+                        "safe",
+                        "reliability",
+                        "dependability",
+                        "confidential",
+                        "confidentiality",
+                        "integrity",
+                        "availability",
+                        "defense",
+                        "defence",
+                        "defensive",
+                        "privacy"
+                        ]
+        flag_cybersecurity = True 
+
+    elif field_name == 'medicine':
+        field_words = ["cure",
+                        'medicine',
+                        'surgery',
+                        'doctors',
+                        'nurses',
+                        'hospital',
+                        'medication',
+                        'prescription',
+                        'pill',
+                        'health',
+                        'cancer',
+                        'antibiotic',
+                        'HIV',
+                        'cancers',
+                        'disease',
+                        'resonance',
+                        'rays',
+                        'CAT',
+                        'blood',
+                        'blood transfusion',
+                        'accident',
+                        'injuries',
+                        'emergency',
+                        'poison',
+                        'transplant',
+                        'biotechnology',
+                        'health care',
+                        'healthcare',
+                        'health-tech',
+                        'genetics',
+                        'DNA',
+                        'RNA',
+                        'lab',
+                        'heart',
+                        'lung',
+                        'lungs',
+                        'kidneys',
+                        'brain',
+                        'gynaecologist',
+                        'cholesterol',
+                        'diabetes',
+                        'stroke',
+                        'infections',
+                        'infection',
+                        'ECG',
+                        'sonogram'
+                        ]
+        
+
+    # flag that identifies if we have applied the filter to select only companies in cybersecurity
+    df = df.loc[df["short_description"].apply(lambda x: check_desc(x, field_words))]
+
+    return df, flag_cybersecurity
+
+
 def extract_data_from_column(column, get_what:str):
     """Extracts data from complex columns
 
@@ -259,7 +350,7 @@ def check_desc(line, words):
     if isinstance(line, float): # line is not a string
         return False
     
-    if sum(w in line for w in words) > 1:
+    if sum(w in line.lower() for w in words) > 1:
     #if any(w in line for w in words):
         return True
     

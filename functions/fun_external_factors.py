@@ -9,6 +9,7 @@ import pandas as pd
 import seaborn as sns
 import networkx as nx
 import scipy.stats as ss
+import haversine as hs
 import matplotlib.pyplot as plt
 
 import numpy as np
@@ -132,8 +133,6 @@ def calibrate_analytic(M,
             sper_corr = spearman[0]
             sper_pvalue = spearman[1]
 
-            #print(f"alpha:{alpha}, beta:{beta} --> corr:{sper_corr} pvalue:{sper_pvalue}")
-
             if sper_pvalue < 1: # statistically significant
                 landscape[alpha_index][beta_index] = sper_corr
                 
@@ -152,6 +151,13 @@ def calibrate_analytic(M,
     if do_plot:
 
         params = {'axes.labelsize': 26, 'axes.titlesize':20, 'legend.fontsize': 18, 'xtick.labelsize': 10, 'ytick.labelsize': 10}
+
+        params = {
+            'axes.labelsize': 26,
+            'axes.titlesize':26, 
+            'legend.fontsize': 14, 
+            'xtick.labelsize': 16, 
+            'ytick.labelsize': 16}
 
         fig,ax=plt.subplots(1,1, figsize=(10, 10))
         plt.rcParams.update(params)
@@ -253,10 +259,14 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
     return exogenous_rank
 
 
-"""
 def extract_coordinates_location(location_company):
-    Extracts the address, the latiutude and the longitude from the dict of the address
-    
+    """Extracts the address, the latitude and the longitude from the dict of the address
+
+    Arg:
+        - location_company: location company expressed in words
+    Return:
+        - lat, lon: position of the location_company
+    """
     
     str_place = location_company['city'] + ', ' + location_company['region'] #+ ', ' +  row['country_code']
 
@@ -269,12 +279,17 @@ def extract_coordinates_location(location_company):
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
-    Calculate the haversine distance (in km) between two points on heart
-    
+    """Calculate the haversine distance (in km) between two points on heart
+
+    Arg:
+        - location_company: location company expressed in words
+    Return:
+        - lat, lon: position of the location_company
+
+    """
 
     loc1=(lat1, lon1)
     loc2=(lat2, lon2)
-    hs.haversine(loc1,loc2)
+    distance = hs.haversine(loc1,loc2)
 
     return distance # in km
-"""
