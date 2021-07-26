@@ -7,6 +7,11 @@ import json
 import math
 import numpy as np
 
+from geopy.geocoders import Nominatim
+import geopandas
+import geocoder
+geolocator = Nominatim(user_agent='myapplication')
+
 import matplotlib.pyplot as plt
 
 from typing import List, Dict
@@ -241,18 +246,21 @@ def extract_classes_company_tech(df):
                 }
 
         # extraction latitude and longitude:
-        #lat, lon  = extract_coordinates_location(location_company)
-        lat = 0
-        lon = 0
-        """
-        location_company = {}
-
-        for x in location_df:
-            #print(x)
-            loc_type = x['location_type']
-            value = x['value']
-            location_company[loc_type] = value
-        """
+        if pd.isnull(row['city']) or pd.isnull(row['region']): # one is nan
+            location = "Not avaiable"
+            lat_c = 90
+            lon_c = 180
+        else:
+            str_place = row['city'] + ', ' + row['region'] #+ ', ' +  row['country_code']
+            location = geolocator.geocode(str_place) # coversion to conventional address (valid for the next command)
+            
+            print(location)
+            if location is not None: # not null
+                lat_c = location.latitude
+                lon_c = location.longitude
+            else: # if None, we set some values very far away
+                lat_c = 90
+                lon_c = 180
     
         # Companies:
         comp_name = row['name']
@@ -261,7 +269,9 @@ def extract_classes_company_tech(df):
             id = row['uuid'],
             name = comp_name,
             location = location_company,
-            technologies = row['category_groups']
+            technologies = row['category_groups'],
+            lat = lat_c,
+            lon = lon_c
                    )
 
         # if CB rank

@@ -8,8 +8,8 @@ class Company:
     name: str
     location: Dict[str, str] # location divided in parts (city, state...)
     technologies: list
-    lat: float =  0 # latitude of the location
-    lon: float =  0 # longitude of the location
+    lat: float # latitude of the location
+    lon: float # longitude of the location
     degree: float =  0
     rank_CB: float = 0
     rank_algo: float =  0 # rank obtained using the TechRank algorithm

@@ -60,8 +60,8 @@ reload(classes)
 # medicine
 # size_comp = [10, 100, 999, 4996, 9974, 14954, 19938, 25203]
 # size_tech = [32, 95, 254, 437, 507, 549, 586, 604]
-size_comp = [500, 1499, 1999]#, 2997]
-size_tech = [199, 290, 326]#, 368]
+size_comp = [4996]
+size_tech = [437]
 
 flag_cybersecurity = False
 
@@ -201,6 +201,7 @@ for i in range(len(size_comp)):
         name_csv = 'savings/useful_datasets/df_rank_evolu.csv'
     
     df_rank_evolu = pd.read_csv(name_csv)
+    df_rank_evolu = df_rank_evolu.drop(['Unnamed: 0'], axis=1)
     # check if that specific case is already in the csv
     if ((df_rank_evolu['num_comp'] == num_comp) &
         (df_rank_evolu['num_tech'] == num_tech) &

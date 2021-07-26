@@ -5,6 +5,7 @@ import json
 import math
 import geopandas
 
+import haversine as hs
 import pandas as pd
 import seaborn as sns
 import networkx as nx
@@ -249,12 +250,59 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
         max_rank = max(dict_comp_cb.values())
         dict_comp_cb_norm = {name: inv/max_rank for (name, inv) in dict_comp_cb.items()}
 
-
         # update exogenous_rank
         perc_contribution = preferences["previous_investments"]/100 # percentage of contribution 
 
         for key, value in exogenous_rank.items():
             exogenous_rank[key] = value + perc_contribution * dict_comp_cb_norm[key]
+    
+    
+    # 3: Geographical position --------------------------------------------------------------------
+    if "geo_position" in preferences.keys() and preferences["geo_position"]>0:
+
+        # position of the investor (let us suppose he is in NY)
+        city_inv = "New York"
+        region_inv = "New York"
+        country_inv = "USA"
+        str_place = city_inv + ', ' + region_inv + ', ' + country_inv
+        location = geolocator.geocode(str_place) # coversion to conventional address (valid for the next command)
+        lat_inv = location.latitude
+        lon_in= location.longitude
+        
+        dict_h = {} # dictionary company Haversine distance
+        
+        for (name, row) in dict_class.items():
+            # lat and lon company
+            lat_c = row.lat
+            lon_c = row.lon
+
+            # Haversine distance between the company and the investor
+            h = haversine_distance(lat_c, lon_c, lat_inv, lon_in)
+
+            dict_h[name] = h
+
+        max_h = max(dict_h.values())
+
+        dict_h_norm = {}
+
+        for name, h in dict_h.items():
+
+            x = 1 - h/max_h 
+
+
+            if x == 0:
+                dict_h_norm[name] = 1 
+            else:
+                dict_h_norm[name] = 1/x 
+ 
+        # update exogenous_rank
+        perc_contribution = preferences["geo_position"]/100 # percentage of contribution 
+
+        for key, value in exogenous_rank.items():
+            exogenous_rank[key] = value + perc_contribution * dict_h_norm[key]
+   
+    
+    
 
     return exogenous_rank
 
