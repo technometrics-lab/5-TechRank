@@ -2,10 +2,14 @@ import pandas as pd
 import networkx as nx
 import os
 import requests
+import random
 import arrow
+import string
 import json
 import math
 import numpy as np
+import requests
+import urllib.parse
 
 from geopy.geocoders import Nominatim
 import geopandas
@@ -122,7 +126,6 @@ def field_extraction (field_name: str, df: pd.DataFrame):
                         "confidentiality",
                         "integrity",
                         "availability",
-                        "defense",
                         "defence",
                         "defensive",
                         "privacy"
@@ -230,9 +233,13 @@ def extract_classes_company_tech(df):
     
     # initialization bipartite graph:
     B = nx.Graph()
-    
-    for index, row in df.iterrows(): # for each company
 
+    # define Nomiation
+    from geopy.geocoders import Nominatim
+    geolocator = Nominatim(user_agent='myapplication')
+    i = 0 # count rows analysed (needed for a trick explained below)
+
+    for index, row in df.iterrows(): # for each company
         
         # location extraction:
         if 'location_comp' in row:
@@ -245,23 +252,42 @@ def extract_classes_company_tech(df):
                 'city': row['city']
                 }
 
+        i = i + 1
+
+        if i%100==0: # trick to avoid to have an error "GeocoderUnavailable" due to the fact that  Nominatim suggests avoiding extensive use. So, it blocks us after a while
+            # in this way we always renew Nominatim every 100 rows.
+            del Nominatim
+            from geopy.geocoders import Nominatim
+            str_name = random.choice(string.ascii_letters)
+            geolocator = Nominatim(user_agent=str_name)
+
         # extraction latitude and longitude:
-        if pd.isnull(row['city']) or pd.isnull(row['region']): # one is nan
-            location = "Not avaiable"
+        if pd.isnull(row['city']) or pd.isnull(row['region']) or pd.isnull(row['country_code']): # one is nan
+            location = "Not available"
             lat_c = 90
             lon_c = 180
         else:
             str_place = row['city'] + ', ' + row['region'] #+ ', ' +  row['country_code']
-            location = geolocator.geocode(str_place) # coversion to conventional address (valid for the next command)
+            # add the country code would give problem in getting the url
             
-            print(location)
+            """location = geolocator.geocode(str_place) # coversion to conventional address (valid for the next command)
             if location is not None: # not null
                 lat_c = location.latitude
-                lon_c = location.longitude
+                lon_c = location.longitude"""
+
+            url = 'https://nominatim.openstreetmap.org/search/' + urllib.parse.quote(str_place) +'?format=json'
+            response = requests.get(url).json()
+
+            if len(response)>0: # not null
+                lat_c = response[0]["lat"]
+                lon_c = response[0]["lon"]
+            
             else: # if None, we set some values very far away
+                print(f"{str_place} is not a good address")
                 lat_c = 90
                 lon_c = 180
-    
+
+
         # Companies:
         comp_name = row['name']
 
@@ -318,8 +344,11 @@ def extract_classes_investors(df):
     
     # dictionary of investors: name investors: class Investor
     dict_inv = {}
+
+    geolocator = Nominatim(user_agent='my-agent')
     
     for index, row in df.iterrows():   
+
         
         # location extraction:
         if 'location_comp' in row:

@@ -151,14 +151,12 @@ def calibrate_analytic(M,
     # plot
     if do_plot:
 
-        params = {'axes.labelsize': 26, 'axes.titlesize':20, 'legend.fontsize': 18, 'xtick.labelsize': 10, 'ytick.labelsize': 10}
-
         params = {
             'axes.labelsize': 26,
             'axes.titlesize':26, 
-            'legend.fontsize': 14, 
-            'xtick.labelsize': 16, 
-            'ytick.labelsize': 16}
+            'legend.fontsize': 19, 
+            'xtick.labelsize': 18, 
+            'ytick.labelsize': 18}
 
         fig,ax=plt.subplots(1,1, figsize=(10, 10))
         plt.rcParams.update(params)
@@ -173,10 +171,10 @@ def calibrate_analytic(M,
 
         # reduce the density of ticks
         for i, tick in enumerate(ax.yaxis.get_ticklabels()):
-            if i % 3 != 0:
+            if i % 4 != 0:
                 tick.set_visible(False)
         for i, tick in enumerate(ax.xaxis.get_ticklabels()):
-            if i % 3 != 0:
+            if i % 4 != 0:
                 tick.set_visible(False)
 
         plt.title(title)
@@ -189,7 +187,6 @@ def calibrate_analytic(M,
 
         plt.savefig(f'{name_plot}.pdf')
         plt.savefig(f'{name_plot}.png')
-
 
     return top_spearman
 
@@ -261,9 +258,10 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
     if "geo_position" in preferences.keys() and preferences["geo_position"]>0:
 
         # position of the investor (let us suppose he is in NY)
-        city_inv = "New York"
-        region_inv = "New York"
-        country_inv = "USA"
+        city_inv = "Zurich"
+        region_inv = "Zurich"
+        country_inv = "CHE"
+        print(f"Investors in {city_inv}")
         str_place = city_inv + ', ' + region_inv + ', ' + country_inv
         location = geolocator.geocode(str_place) # coversion to conventional address (valid for the next command)
         lat_inv = location.latitude
@@ -288,7 +286,6 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
         for name, h in dict_h.items():
 
             x = 1 - h/max_h 
-
 
             if x == 0:
                 dict_h_norm[name] = 1 

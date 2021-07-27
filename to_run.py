@@ -60,24 +60,28 @@ reload(classes)
 # medicine
 # size_comp = [10, 100, 999, 4996, 9974, 14954, 19938, 25203]
 # size_tech = [32, 95, 254, 437, 507, 549, 586, 604]
-size_comp = [4996]
-size_tech = [437]
+size_comp = [499]
+size_tech = [306]
 
-flag_cybersecurity = False
+flag_cybersecurity = True
 
-preferences_comp = {"previous_investments":100,
-                    "crunchbase_rank":0}
+preferences_comp = {"previous_investments":0,
+                    "geo_position":100}
 preferences_tech = {"previous_investments":100}
 
-for i in range(len(size_comp)):
+print(preferences_comp)
+
+for i in range(len(size_comp)): 
+
     num_comp = size_comp[i]
     num_tech = size_tech[i]
-    
+
+    # upload data
     print(f'\n\n num comp:{num_comp}, num tech: {num_tech}\n')
 
     if flag_cybersecurity==False: # all fields
-        name_file_com = f'savings/classes/dict_companies_{num_comp}.pickle'
-        name_file_tech = f'savings/classes/dict_tech_{num_tech}.pickle'
+        name_file_com = f'savings/classes/medicine/dict_companies_{num_comp}.pickle'
+        name_file_tech = f'savings/classes/medicine/dict_tech_{num_tech}.pickle'
         name_file_graph = f'savings/networks/comp_{num_comp}_tech_{num_tech}.gpickle'
     else: # only companies in cybersecurity
         name_file_com = f'savings/classes/dict_companies_cybersecurity_{num_comp}.pickle'
@@ -133,7 +137,7 @@ for i in range(len(size_comp)):
                        dict_class=dict_tech, 
                        exogenous_rank=create_exogenous_rank('Technologies', dict_tech, preferences_tech), 
                        index_function=lambda x: (x-50)/25,
-                       title='Correlation for Companies',
+                       title='Correlation for Technologies',
                        do_plot=True,
                        preferences = preferences_tech,
                        flag_cybersecurity = flag_cybersecurity)
@@ -167,9 +171,9 @@ for i in range(len(size_comp)):
 
 
     if flag_cybersecurity==False:
-        name = "savings/csv_results/cybersecurity/complete_companies_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+        name = "savings/csv_results/cybersecurity/complete_companies_" + str(len(dict_companies)) + "_" + str(preferences_comp) + ".csv"
     else:
-        name = "savings/csv_results/complete_companies_" + str(len(dict_tech)) + "_" + str(preferences_tech) + ".csv"
+        name = "savings/csv_results/complete_companies_" + str(len(dict_companies)) + "_" + str(preferences_comp) + ".csv"
    
     df_final_companies.to_csv(name, index = False, header=True)
 
@@ -201,7 +205,7 @@ for i in range(len(size_comp)):
         name_csv = 'savings/useful_datasets/df_rank_evolu.csv'
     
     df_rank_evolu = pd.read_csv(name_csv)
-    df_rank_evolu = df_rank_evolu.drop(['Unnamed: 0'], axis=1)
+    df_rank_evolu = df_rank_evolu.drop(['Unnamed: 0'], axis=1, errors='ignore')
     # check if that specific case is already in the csv
     if ((df_rank_evolu['num_comp'] == num_comp) &
         (df_rank_evolu['num_tech'] == num_tech) &
@@ -233,7 +237,7 @@ for i in range(len(size_comp)):
                 }
         df_rank_evolu = df_rank_evolu.append(new_row, ignore_index=True)
 
-    df_rank_evolu = df_rank_evolu.drop(['Unnamed: 0'], axis=1)
+    df_rank_evolu = df_rank_evolu.drop(['Unnamed: 0'], axis=1, errors='ignore')
     df_rank_evolu.to_csv(name_csv)
     
  
