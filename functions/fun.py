@@ -565,26 +565,6 @@ def plot_bipartite_graph(G, small_degree=True, percentage=10, circular=False):
     
     plt.axis('off')
 
-    if "Social Recruiting" in G.nodes():
-        G.remove_node("Social Recruiting")
-    if "Mobile" in G.nodes():
-        G.remove_node("Mobile")
-    if "Sales" in G.nodes():
-        G.remove_node("Sales")
-    if "Analytics" in G.nodes():
-        G.remove_node("Analytics")
-    if "Government" in G.nodes():
-        G.remove_node("Government")
-    if "Education" in G.nodes():
-        G.remove_node("Education")
-    if "Personalization" in G.nodes():
-        G.remove_node("Personalization")
-    if "Military" in G.nodes():
-        G.remove_node("Military")
-
-
-    k = 2.3/math.sqrt(G.order())
-    pos = nx.spring_layout(G, k=k) 
 
     # company, value = bipartite.sets(G)
     # subsituted with:

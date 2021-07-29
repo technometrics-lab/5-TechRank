@@ -5,11 +5,14 @@
 
 Tech-Rank algorithm's documentation
 ===============================================
+ Write all the description...
+
+
 
 .. toctree::
    :caption: Table of Contents
 
-   readme_link
+   function_link
 
 
 Indices and tables

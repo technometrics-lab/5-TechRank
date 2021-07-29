@@ -258,12 +258,13 @@ def create_exogenous_rank(ua, dict_class, preferences: Dict[str, float]):
     if "geo_position" in preferences.keys() and preferences["geo_position"]>0:
 
         # position of the investor (let us suppose he is in NY)
-        city_inv = "Zurich"
-        region_inv = "Zurich"
-        country_inv = "CHE"
+        city_inv = "London"
+        region_inv = "England"
+        country_inv = "UK"
         print(f"Investors in {city_inv}")
         str_place = city_inv + ', ' + region_inv + ', ' + country_inv
         location = geolocator.geocode(str_place) # coversion to conventional address (valid for the next command)
+
         lat_inv = location.latitude
         lon_in= location.longitude
         

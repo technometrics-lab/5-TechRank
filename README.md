@@ -1,12 +1,15 @@
-TECH-RANK algorithm
-=======
+=============================================
+TECH-RANK algorithm README
+=============================================
 
 ## Scope
+
 TechRank aims to help decision-makers to quantitatively assess the influence of the entities in order to  take good investments decisions under high level of uncertainty. 
 Please refer to [the short paper](../docs/_static/TechRank_shortpaper.pdf)
 
 ------
 ### Code structure and usage
+
 The code is a mix of notebooks and `py` files: 
 - the _py files_ contain the functions needed in the notebook and the declaration of the classes;
 - the _notebooks_ explain all the steps.
