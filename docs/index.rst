@@ -11,7 +11,7 @@ Goal
 TechRank aims to help decision-makers to quantitatively assess the influence of the entities in order to  take good investments decisions under high level of uncertainty. 
 
 Abstract
-########
+############
 The cybersecurity technological landscape is a complex ecosystem in which entities -- such as  companies and technologies -- influence each other in a non-trivial manner. Understanding influence measures of each entity is central when it comes to  take informed technological  investment  decisions. 
 
 To recognize the mutual influence of companies and technologies in cybersecurity, we consider a bi-partite graph that links companies and technologies. Then, we weight nodes by applying a recursive algorithm based on the method of reflection. This endeavour helps to assign a measure of how an entity impacts the cybersecurity market. Our results help (i) to measure the magnitude of influence of each entity, (ii) decision-makers to address more informed investment strategies, according to their preferences. 
@@ -39,7 +39,7 @@ We create the documentation in HTML using [Sphinx](https://www.sphinx-doc.org/en
 
 
 Files description
-########
+####################
 
 .. csv-table:: Short description of the files
    :header: "File name ", "Short Description"
@@ -60,7 +60,7 @@ Files description
    "functions/fun_meth_reflections.py", "Implementation of all the functions for the random walk step"
    "functions/fun_external_factors.py", "Implementation of all the functions for the inclusion of the exogenous factors"
    "docs/...", "Material for creating the documentation"
-   "docs//build/html/index.html", "Documentation in HTML"
+   "docs/build/html/index.html", "Documentation in HTML"
    "plots/...", "All the plots"
    "savings/...", "Results savings"
    "data/sample_CB_date", "Sample of CB data"
@@ -74,7 +74,7 @@ Please note that data (also the classes) are not available because they are rele
 
 Hints of bibliography
 ########################
-The main *sources* of this work are the following:
+The two main resources of this work are the following:
 
 
 * `The Building Blocks of Economic Complexity <https://rb.gy/rhrsi2>`_ by César A. Hidalgo and Ricardo Hausmann
@@ -84,15 +84,9 @@ The main *sources* of this work are the following:
 
 
 Table of content
-################
+####################
 .. toctree::
 
    function_link
 
 
-Indices and tables
-----------------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

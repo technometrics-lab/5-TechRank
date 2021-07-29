@@ -9,3 +9,9 @@ In this project we use 3 classes: Company, Technology and Investor.
    :members:
    :undoc-members:
    :show-inheritance:
+
+
+.. automodule:: main(3)
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -14,7 +14,7 @@ To recognize the mutual influence of companies and technologies in cybersecurity
 Investors can customzse the algorithm by indicating which external factors --such as previous investments and geographical positions-- are relevant for them. They can select their interests among a list of properties about companies and technologies and weights them according to their needs. This preferences are automatically included in the algorithm and the TechRank's scores changes accordingly.
 
 ------
-## Files
+## Documents
 For more information please refer to:
 - [the short paper](../docs/_static/TechRank_shortpaper.pdf) (it does not investigate the inclusion of exogenous factors)
 - [the master thesis](TechRank_thesis.pdf)
@@ -50,20 +50,19 @@ Short description of the files:
 | main(3).ipynb                | TechRank algorithm (both parameters' optimization and random walker)  |  
 | plots(4).ipynb               | Bi-partite network plots      |  
 | create_useful_dataset.ipynb | Creation .CSV where TechRank results are saved      |  
-| analysis_results.ipynb      | Analysis of the Techrank results     |  
+| analysis_results.ipynb      | Analysis of the TechRank results     |  
 | analysis_investors.ipynb    | Analysis of the investors on CB      |  
 | crunchbase_api.ipynb        | How make queries and extract data using the CB API      |  
 |country_distance.ipynb       | Extraction Cs position and calculation distance from Is|
-|country_distance.ipynb       | Extraction Cs position and calculation distance from Is|
 |to_run.py                    | Step (3) implemented as a loop |
 | functions/fun.py            | Implementation of all the functions needed before running TechRank (data cleaning, creation classes, plots...) |
-| functions/fun_meth_reflections.py  | Implementation of all the functions for the random walk step. |
-| functions/fun_external_factors.py  | Implementation of all the functions for the inclusion of the exogenous factors. |
+| functions/fun_meth_reflections.py  | Implementation of all the functions for the random walk step |
+| functions/fun_external_factors.py  | Implementation of all the functions for the inclusion of the exogenous factors |
 | docs/...  | Material for creating the documentation |
-| docs//build/html/index.html  | Documentation in HTML |
+| docs/build/html/index.html  | Documentation in HTML |
 | plots/... | All the plots |
 | savings/... | Results savings |
-| data/sample_CB_date | sample of CB data|
+| data/sample_CB_date | Sample of CB data|
 
 
 Each file contains more details and comments. 
@@ -73,7 +72,7 @@ Please note that data (also the classes) are not available because they are rele
 
 
 ------
-## Hints of bliography:
+## Hints of bibliography:
 The main *sources* of this work are the following:
 - "The Building Blocks of Economic Complexity" by César A. Hidalgo and Ricardo Hausmann
 https://rb.gy/rhrsi2
