@@ -194,7 +194,7 @@ dmypy.json
 
 DBpedia/
 graph/
-data/
+data/data_cb
 company.json/
 classes/
 classes/dict_companies.pickle
