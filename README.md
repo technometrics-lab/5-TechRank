@@ -55,12 +55,13 @@ Short description of the files:
 | functions/fun_external_factors.py  | Implementation of all the functions for the inclusion of the exogenous factors. |
 | docs/...  | Material for creating the documentation |
 | plots/... | All the plots |
-| savings/... | Results savings 
+| savings/... | Results savings |
+| data/sample_CB_date | sample of CB data|
 
 
 Each file contains more details and comments. 
 
-Please note that data (also the classes) are not available because they are released by Crunchbase to the CYD Campus with a proprietary licence that does not allow us to share them. 
+Please note that data (also the classes) are not available because they are released by Crunchbase to the CYD Campus with a proprietary licence that does not allow us to share them. However, we plovide a sample of the data. 
 
 
 
