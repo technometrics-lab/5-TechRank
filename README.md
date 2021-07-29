@@ -28,11 +28,17 @@ The code is a mix of notebooks and `py` files:
 - the _notebooks_ explain all the steps.
 
 **Data**:
-[Crunchbase (CB) pro](https://www.crunchbase.com/home)
+[Crunchbase (CB) pro](https://www.crunchbase.com/home).
 
 **Classes** :
 We work with 3 dataclasses: `Companies`, `Technologies` and `Investors`.
 
+**Documentation**:
+We create the documentation in HTML using [Sphinx](https://www.sphinx-doc.org/en/master/).
+
+
+------
+## Files description:
 
 Short description of the files:
 
@@ -54,6 +60,7 @@ Short description of the files:
 | functions/fun_meth_reflections.py  | Implementation of all the functions for the random walk step. |
 | functions/fun_external_factors.py  | Implementation of all the functions for the inclusion of the exogenous factors. |
 | docs/...  | Material for creating the documentation |
+| docs//build/html/index.html  | Documentation in HTML |
 | plots/... | All the plots |
 | savings/... | Results savings |
 | data/sample_CB_date | sample of CB data|
