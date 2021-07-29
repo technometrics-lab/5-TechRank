@@ -53,17 +53,14 @@ import classes
 reload(classes)
 
 # cybersecurity
-#size_comp = [10, 100, 500, 1000, 1499, 1999, 2442]
-#size_tech = [26, 131, 305, 384, 431, 456, 478]
-#flag_cybersecurity = True
+size_comp = [10, 100, 499,997, 1494, 1990, 2429]
+size_tech = [26, 134, 306, 372, 431, 456, 477]
+flag_cybersecurity = True
 
 # medicine
 # size_comp = [10, 100, 999, 4996, 9974, 14954, 19938, 25203]
 # size_tech = [32, 95, 254, 437, 507, 549, 586, 604]
-size_comp = [499]
-size_tech = [306]
-
-flag_cybersecurity = True
+# flag_cybersecurity = False
 
 preferences_comp = {"previous_investments":0,
                     "geo_position":100}
