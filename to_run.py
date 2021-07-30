@@ -5,7 +5,6 @@ import os.path
 import json
 import pickle
 import sys
-import atexit
 import time
 import random
 import operator
@@ -57,13 +56,16 @@ size_comp = [10, 100, 499,997, 1494, 1990, 2429]
 size_tech = [26, 134, 306, 372, 431, 456, 477]
 flag_cybersecurity = True
 
+size_comp = [100]
+size_tech = [134]
+
 # medicine
 # size_comp = [10, 100, 999, 4996, 9974, 14954, 19938, 25203]
 # size_tech = [32, 95, 254, 437, 507, 549, 586, 604]
 # flag_cybersecurity = False
 
-preferences_comp = {"previous_investments":0,
-                    "geo_position":100}
+preferences_comp = {"previous_investments":100,
+                    "geo_position":0}
 preferences_tech = {"previous_investments":100}
 
 print(preferences_comp)
