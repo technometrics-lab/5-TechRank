@@ -3,7 +3,7 @@ TECH-RANK
 
 ## Goal
 
-TechRank aims to help decision-makers to quantitatively assess the influence of the entities in order to take relevant investments decisions under high level of uncertainty. 
+TechRank aims to help decision-makers to quantitatively assess the influence of the entities in order to take relevant investments decisions under high level of uncertainty.
 
 ------
 ## Abstract
